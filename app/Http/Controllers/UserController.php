@@ -52,11 +52,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //$this->authorize('update', $user);
-        print_r("HEEEEEEEEEEEEEEEEEEEEEELOOOOOOOOOOOOOOOOOOOOOO");
         $this->validate($request, [
-            // У обновления немного изменённая валидация. В проверку уникальности добавляется название поля и id текущего объекта
-            // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
         ]);
