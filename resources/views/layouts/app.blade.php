@@ -24,6 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <i class="fas fa-thumbtack"></i>
                     Task-Manager
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -33,7 +34,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <a class="nav-link" href="{{ route('users.index') }}"><i class="fa fa-users" aria-hidden="false"></i>  Users</a> <!--именованный роутинг -->
+                        @if (Auth::user())
+                            <a class="nav-link" href="{{ route('users.index') }}"><i class="fa fa-users" aria-hidden="false"></i>  Users</a> <!--именованный роутинг -->
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -74,6 +77,7 @@
         </nav>
 
         <main class="py-4">
+            @include('flash::message')
             @yield('content')
         </main>
     </div>

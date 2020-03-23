@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    \Log::debug('Test debug message');
+    //\Log::debug('Test debug message');
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::resource('/users', 'UserController');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/users', 'UserController', ['except' => ['destroy', 'create', 'store']]);
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
