@@ -25,9 +25,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
+        //$user = User::findOrFail($id);
         return view('user.show', compact('user'));
     }
 
@@ -37,9 +37,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
+        //$user = User::findOrFail($id);
         return view('user.edit', compact('user'));
     }
 
@@ -53,7 +53,11 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
+            'nickname' => ['required', 'string', 'max:255', 'unique:users,nickname,' . $user->id],
             'name' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string'],
+            'birthday' => ['required', 'date'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
         ]);
 
@@ -64,4 +68,16 @@ class UserController extends Controller
         return redirect()
             ->route('users.index');
     }
+
+    public function destroy(User $user)
+    {
+        print_r('WQEQWEQWEQWEQEQE');
+        if ($user) {
+            $user->delete();
+        }
+
+        flash('Delete sucessful!')->success();
+        return redirect()->route('home');
+    }
+    
 }

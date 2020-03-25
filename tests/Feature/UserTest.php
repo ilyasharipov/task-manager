@@ -43,14 +43,19 @@ class ExampleTest extends TestCase
     public function testUsersUpdate()
     {
         $expected = [
+            'nickname' => 'Update',
             'name' => 'updateName',
-            'email' => 'update@email.com'
+            'email' => 'update@email.com',
+            'lastName' => 'Updaticus',
+            'gender' => 'female',
+            'birthday' => '2020-12-20',
         ];
-
+        print_r($this->user->toArray());
         $url = route('users.update', $this->user);
         $response = $this->patch($url, $expected);
         $response->assertStatus(302);
         $this->user->refresh();
+        print_r($this->user->toArray());
         $this->assertDatabaseHas('users', $expected);
     }
 }

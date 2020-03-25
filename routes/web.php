@@ -21,7 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/users', 'UserController', ['except' => ['destroy', 'create', 'store']]);
+    Route::resource('/users', 'UserController', ['except' => ['create', 'store']]);
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

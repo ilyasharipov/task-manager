@@ -13,15 +13,31 @@
                             <td>{{ $user->id }}</td>
                         </tr>
                         <tr>
+                            <th>Nickname</th>
+                            <td>{{ $user->nickname }}</td>
+                        </tr>
+                        <tr>
                             <th>Username</th>
                             <td>{{ $user->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Last name</th>
+                            <td>{{ $user->lastName }}</td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td>{{ $user->gender }}</td>
+                        </tr>
+                        <tr>
+                            <th>Birthday</th>
+                            <td>{{ $user->birthday }}</td>
                         </tr>
                         <tr>
                             <th>Email</th>
                             <td>{{ $user->email }}</td>
                         </tr>
                         <tr>
-                            <th>Registation data</th>
+                            <th>Data registation</th>
                             <td>{{ $user->created_at }}</td>
                         </tr>
                     </table>
