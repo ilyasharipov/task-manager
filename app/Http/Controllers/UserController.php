@@ -71,7 +71,6 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        print_r('WQEQWEQWEQWEQEQE');
         if ($user) {
             $user->delete();
         }
@@ -79,5 +78,4 @@ class UserController extends Controller
         flash('Delete sucessful!')->success();
         return redirect()->route('home');
     }
-    
 }
