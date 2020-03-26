@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ $user->name }}</div>
+                <div class="card-header">{{ $user->name }} {{ $user->lastName }}</div>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <tr>
@@ -32,10 +32,12 @@
                             <th>Birthday</th>
                             <td>{{ $user->birthday }}</td>
                         </tr>
+                        @if (Auth::user()->id == $user->id)
                         <tr>
                             <th>Email</th>
                             <td>{{ $user->email }}</td>
                         </tr>
+                        @endif
                         <tr>
                             <th>Data registation</th>
                             <td>{{ $user->created_at }}</td>

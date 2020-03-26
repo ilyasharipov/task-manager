@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
     <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -11,16 +9,14 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">username</th>
-                            <th scope="col">email</th>
+                            <th scope="col">nickname</th>
                         </tr>
                     </thead>
                     @foreach ($users as $user)
                         <tbody>
                             <tr>
-                                <th scope="row"><a href="{{ route('users.show', $user->id) }}">{{ $user->id }}</a></th>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
+                                <th scope="row">{{ $user->id }}</th>
+                                <td><a href="{{ route('users.show', $user->id) }}">{{ $user->nickname}}</a></td>
                             </tr>
                         </tbody>
                     @endforeach
