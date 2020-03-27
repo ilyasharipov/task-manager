@@ -9,7 +9,8 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">nickname</th>
+                            <th scope="col">Nickname</th>
+                            <th scope="col">Data registation</th>
                         </tr>
                     </thead>
                     @foreach ($users as $user)
@@ -17,6 +18,7 @@
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
                                 <td><a href="{{ route('users.show', $user->id) }}">{{ $user->nickname}}</a></td>
+                                <td>{{ $user->created_at}}</td>
                             </tr>
                         </tbody>
                     @endforeach

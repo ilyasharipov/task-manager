@@ -12,6 +12,8 @@
                         @csrf
                         @method('PATCH')
 
+                        <input type="hidden" name="type" value="update_profile">
+
                         <div class="form-group row">
                             <label for="nickname" class="col-md-4 col-form-label text-md-right">Nickname</label>
 

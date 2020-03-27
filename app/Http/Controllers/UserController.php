@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UserController extends Controller
@@ -37,10 +38,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
-        //$user = User::findOrFail($id);
-        return view('user.edit', compact('user'));
+        $typeEdit = $request['type'];
+
+        switch ($typeEdit) {
+            case 'edit_profile':
+                return view('user.edit_profile', compact('user'));
+            break;
+            case 'change_password':
+                return view('user.change_password', compact('user'));
+            break;
+        }
     }
 
     /**
@@ -52,21 +61,40 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->validate($request, [
-            'nickname' => ['required', 'string', 'max:255', 'unique:users,nickname,' . $user->id],
-            'name' => ['required', 'string', 'max:255'],
-            'lastName' => ['required', 'string', 'max:255'],
-            'gender' => ['required', 'string'],
-            'birthday' => ['required', 'date'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
-        ]);
+        $typeUpdate = $request['type'];
+        print($typeUpdate);
+        switch ($typeUpdate) {
+            case 'update_profile':
+                $this->validate($request, [
+                    'nickname' => ['required', 'string', 'max:255', 'unique:users,nickname,' . $user->id],
+                    'name' => ['required', 'string', 'max:255'],
+                    'lastName' => ['required', 'string', 'max:255'],
+                    'gender' => ['required', 'string'],
+                    'birthday' => ['required', 'date'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+                ]);
 
-        $user->fill($request->all());
-        $user->save();
+                $user->fill($request->all());
+                $user->save();
 
-        flash('Update sucessful!')->success();
-        return redirect()
-            ->route('users.index');
+                flash('Update sucessful!')->success();
+
+                return redirect()
+                    ->route('users.index');
+                break;
+            case 'change_password':
+                $this->validate($request, [
+                    'password' => ['required', 'string', 'min:8', 'confirmed'],
+                ]);
+
+                $user->password = Hash::make($request['password']);
+                $user->save();
+
+                flash('Change password sucessful!')->success();
+                return redirect()
+                ->route('users.index');
+                break;
+        }
     }
 
     public function destroy(User $user)

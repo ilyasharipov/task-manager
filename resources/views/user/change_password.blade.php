@@ -5,16 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header">{{ __('Change Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.update') }}">
+                    <form method="POST" action="{{ route('users.update', $user->id) }}">
                         @csrf
+                        @method('PATCH')
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+                        <input type="hidden" name="type" value="change_password">
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('New password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -38,7 +39,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
+                                    {{ __('Change Password') }}
                                 </button>
                             </div>
                         </div>
