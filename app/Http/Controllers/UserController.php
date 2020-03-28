@@ -28,7 +28,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //$user = User::findOrFail($id);
         return view('user.show', compact('user'));
     }
 
@@ -62,7 +61,6 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $typeUpdate = $request['type'];
-        print($typeUpdate);
         switch ($typeUpdate) {
             case 'update_profile':
                 $this->validate($request, [

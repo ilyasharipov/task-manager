@@ -37,6 +37,7 @@
                     <ul class="navbar-nav mr-auto">
                         @if (Auth::user())
                             <a class="nav-link" href="{{ route('users.index') }}"><i class="fa fa-users" aria-hidden="false"></i>  Users</a> <!--именованный роутинг -->
+                            <a class="nav-link" href="{{ route('tasks.index') }}"><i class="fas fa-tasks"></i>  Tasks</a> <!--именованный роутинг -->
                         @endif
                     </ul>
 

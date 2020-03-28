@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/users', 'UserController', ['except' => ['create', 'store']]);
+    Route::resource('/tasks', 'TaskController');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
