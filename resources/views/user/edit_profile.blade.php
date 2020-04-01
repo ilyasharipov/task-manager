@@ -100,7 +100,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     Update
                                 </button>
-                                <a class="btn btn-danger" role="submit" href="{{ route('users.destroy', $user->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow">Delete</a>
+                                <a class="btn btn-danger" role="submit" href="{{ route('users.destroy', $user->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow">Delete your account</a>
                             </div>
                         </div>
 

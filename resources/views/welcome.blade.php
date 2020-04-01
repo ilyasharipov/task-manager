@@ -4,10 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Task manager</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+        <!-- Scripts -->
+        <script src="https://kit.fontawesome.com/10bc916d0e.js" crossorigin="anonymous"></script>
 
         <!-- Styles -->
         <style>
@@ -68,7 +71,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}"><i class="fas fa-home"></i>  Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -81,7 +84,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Task-Manager
+                <i class="fas fa-thumbtack"></i>  Task-Manager
                 </div>
             </div>
         </div>

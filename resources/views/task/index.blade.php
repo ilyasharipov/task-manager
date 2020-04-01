@@ -7,6 +7,7 @@
         <div class="col-md-12">
                 @if(Auth::check())
                     <a class="btn btn-lg mb-2 btn-primary" href="{{ route('tasks.create') }}" role="button"><i class="fas fa-plus-circle"></i>  Create task</a>
+                    <a class="btn btn-lg mb-2 btn-success" href="{{ route('taskstatuses.index') }}" role="button"><i class="fas fa-plus"></i>  Create task status</a>
                 @endif
                 <table class="table">
                     <thead>
@@ -32,8 +33,8 @@
                                 <td>{{ $task->assignedTo }}</td>
                                 <td>{{ $task->tags }}</td>
                                 <td>
-                                    <a class="btn btn-success" href="{{ route('tasks.edit', $task->id) }}" role="button">Edit</a>
-                                    <a class="btn btn-danger" role="submit" href="{{ route('tasks.destroy', $task->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow">Delete</a>
+                                    <a class="btn btn-success" href="{{ route('tasks.edit', $task->id) }}" role="button"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-danger" role="submit" href="{{ route('tasks.destroy', $task->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                         </tbody>
