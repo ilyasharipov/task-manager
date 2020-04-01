@@ -5,9 +5,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            <div class="card-header"><h3><i class="fas fa-tasks"></i>  Tasks</h3></div>
                 @if(Auth::check())
-                    <a class="btn btn-lg mb-2 btn-primary" href="{{ route('tasks.create') }}" role="button"><i class="fas fa-plus-circle"></i>  Create task</a>
-                    <a class="btn btn-lg mb-2 btn-success" href="{{ route('taskstatuses.index') }}" role="button"><i class="fas fa-plus"></i>  Create task status</a>
+                    <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('tasks.create') }}" role="button"><i class="fas fa-plus-circle"></i>  Create task</a>
+                    <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('taskstatuses.index') }}" role="button"><i class="fas fa-cogs"></i>  Status settings</a>
                 @endif
                 <table class="table">
                     <thead>

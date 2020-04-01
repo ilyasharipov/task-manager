@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ $user->name }} {{ $user->lastName }}</div>
+                <div class="card-header"><h4><i class="fas fa-user"></i>  {{ $user->name }} {{ $user->lastName }}</h4></div>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <tr>

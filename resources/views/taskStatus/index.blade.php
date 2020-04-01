@@ -4,21 +4,23 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-8">
+            <div class="card-header"><h3><i class="fas fa-star-half-alt"></i>  Task statuses</h3></div>
                 @if(Auth::check())
-                    <a class="btn btn-lg mb-2 btn-primary" href="{{ route('taskstatuses.create') }}" role="button"><i class="fas fa-plus-circle"></i>  Create task status</a>
+                    <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('taskstatuses.create') }}" role="button"><i class="fas fa-plus-circle"></i>  Create task status</a>
                 @endif
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                     </tr>
+                            <th scope="col">Action</th>
+                        </tr>
                     </thead>
                     @foreach ($taskStatuses as $taskStatus)
                         <tbody>
                             <tr>
-                                <th scope="row">{{ $taskStatus->id }}</th>
+                                <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $taskStatus->name }}</td>
                                 <td>
                                     <a class="btn btn-success" href="{{ route('taskstatuses.edit', $taskStatus->id) }}" role="button"><i class="fas fa-edit"></i></a>
