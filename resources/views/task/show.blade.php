@@ -22,7 +22,7 @@
                         </tr>
                         <tr>
                             <th>Status</th>
-                            <td>{{ $task->status }}</td>
+                            <td>{{ $task->status->name ?? null }}</td>
                         </tr>
                         <tr>
                             <th>Gender</th>

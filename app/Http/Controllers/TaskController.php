@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\TaskStatus;
+use App\User;
 use App\Http\Requests\StoreTaskPost;
 use Illuminate\Http\Request;
 
@@ -16,8 +18,9 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::paginate();
+        $statuses = TaskStatus::paginate();
 
-        return view('task.index', compact('tasks'));
+        return view('task.index', compact('tasks', 'statuses'));
     }
 
     /**
@@ -28,7 +31,10 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        return view('task.create', compact('task'));
+        $statuses = TaskStatus::all();
+        $users = User::all();
+
+        return view('task.create', compact('task', 'statuses', 'users'));
     }
 
     /**
@@ -41,6 +47,11 @@ class TaskController extends Controller
     {
         $request->validated();
         $task = new Task();
+        $status = $request->input('status');
+        $assignedToUser = $request->input('assignedTo_id');
+        $task->status()->associate($status);
+        $task->creator()->associate(\Auth::user());
+        $task->assignedTo()->associate($assignedToUser);
         $task->fill($request->all());
         $task->save();
 

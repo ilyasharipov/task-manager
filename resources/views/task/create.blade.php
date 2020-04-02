@@ -39,6 +39,42 @@
                                 @enderror
                         </div>
 
+                        <div class="form-group row">
+                            <label for="status_id" class="col-md-4 col-form-label text-md-right">Task status</label>
+                            <div class="col-md-6">
+                                <select class="form-control" id="status_id" name="status_id" value="{{ old('status_id') }}">
+                                    <option value="">Selected</option>
+                                    @foreach($statuses as $status)
+                                        <option value="{{ $status->id }} ">{{ $status->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                                @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="assigned_to_id" class="col-md-4 col-form-label text-md-right">Assigned to</label>
+                            <div class="col-md-6">
+                                <select class="form-control" id="assigned_to_id" name="assigned_to_id" value="{{ old('assigned_to_id') }}">
+                                    <option value="">Selected</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }} ">{{ $user->nickname }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                                @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

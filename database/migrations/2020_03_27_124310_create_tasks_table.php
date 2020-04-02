@@ -17,9 +17,12 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('status')->nullable();
-            $table->string('creator')->nullable();
-            $table->string('assignedTo')->nullable();
+            $table->string('status_id')->nullable();
+            $table->foreign('status_id')->references('id')->on('task_statuses');
+            $table->string('creator_id')->nullable();
+            $table->foreign('creator_id')->references('id')->on('users');
+            $table->string('assigned_to_id')->nullable();
+            $table->foreign('assigned_to_id')->references('id')->on('users');
             $table->string('tags')->nullable();
             $table->timestamps();
         });
