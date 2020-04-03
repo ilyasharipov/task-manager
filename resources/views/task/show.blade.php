@@ -26,11 +26,11 @@
                         </tr>
                         <tr>
                             <th>Gender</th>
-                            <td>{{ $task->creator }}</td>
+                            <td>{{ $task->creator->nickname }}</td>
                         </tr>
                         <tr>
                             <th>Assigned to</th>
-                            <td>{{ $task->assignedTo }}</td>
+                            <td>{{ $task->assignedTo->nickname }}</td>
                         </tr>
                         <tr>
                             <th>Tags</th>
