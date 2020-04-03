@@ -14,7 +14,7 @@ class CreateTaskStatusesTable extends Migration
     public function up()
     {
         Schema::create('task_statuses', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });

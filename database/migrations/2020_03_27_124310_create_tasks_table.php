@@ -14,29 +14,16 @@ class CreateTasksTable extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            // $table->integer('status_id')->unsigned();
-            // $table->integer('creator_id')->unsigned()->nullable();
-            // $table->integer('assigned_to_id')->unsigned()->nullable();
-
-            // $table->foreign('status_id')->references('id')->on('task_statuses');
-            // $table->foreign('creator_id')->references('id')->on('users');
-            // $table->foreign('assigned_to_id')->references('id')->on('users');
-            $table->string('tags')->nullable();
-
-
-            $table->unsignedInteger('status_id');
-            $table->unsignedInteger('creator_id');
-            $table->unsignedInteger('assigned_to_id');
-
+            $table->integer('status_id');
+            $table->integer('creator_id')->nullable();
+            $table->integer('assigned_to_id')->nullable();
             $table->foreign('status_id')->references('id')->on('task_statuses');
             $table->foreign('creator_id')->references('id')->on('users');
             $table->foreign('assigned_to_id')->references('id')->on('users');
-
-
-
+            $table->string('tags')->nullable();
             $table->timestamps();
         });
     }
