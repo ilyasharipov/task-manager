@@ -14,10 +14,10 @@ class CreateTasksTable extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('status_id')->nullable();
+            $table->bigInteger('status_id')->nullable();
             $table->foreign('status_id')->references('id')->on('task_statuses');
             $table->bigInteger('creator_id')->nullable();
             $table->foreign('creator_id')->references('id')->on('users');
