@@ -17,13 +17,26 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->integer('status_id')->unsigned();
-            $table->integer('creator_id')->unsigned()->nullable();
-            $table->integer('assigned_to_id')->unsigned()->nullable();
-            $table->foreign('status_id')->references('id')->on('task_statuses')->onDelete('cascade');
-            $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('assigned_to_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->integer('status_id')->unsigned();
+            // $table->integer('creator_id')->unsigned()->nullable();
+            // $table->integer('assigned_to_id')->unsigned()->nullable();
+
+            // $table->foreign('status_id')->references('id')->on('task_statuses');
+            // $table->foreign('creator_id')->references('id')->on('users');
+            // $table->foreign('assigned_to_id')->references('id')->on('users');
             $table->string('tags')->nullable();
+
+
+            $table->unsignedInteger('status_id');
+            $table->unsignedInteger('creator_id');
+            $table->unsignedInteger('assigned_to_id');
+
+            $table->foreign('status_id')->references('id')->on('task_statuses');
+            $table->foreign('creator_id')->references('id')->on('users');
+            $table->foreign('assigned_to_id')->references('id')->on('users');
+
+
+
             $table->timestamps();
         });
     }
