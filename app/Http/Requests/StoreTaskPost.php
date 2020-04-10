@@ -25,10 +25,9 @@ class StoreTaskPost extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['string', 'max:400'],
-            //'status' => ['required', 'string'], //рекве
-            //'creator' => ['string'],
-            //'assignedTo' => ['string'],
+            'description' => ['nullable', 'string', 'max:400'],
+            'status_id' => ['nullable', 'string'],
+            'assigned_to_id' => ['nullable', 'string'],
             //'tags' => ['string']
         ];
     }

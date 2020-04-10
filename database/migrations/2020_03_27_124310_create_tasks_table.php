@@ -17,10 +17,10 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->integer('status_id');
-            $table->integer('creator_id')->nullable();
-            $table->integer('assigned_to_id')->nullable();
-            $table->foreign('status_id')->references('id')->on('task_statuses');
+            $table->integer('status_id')->unsigned()->nullable();
+            $table->integer('creator_id')->unsigned()->nullable();
+            $table->integer('assigned_to_id')->unsigned()->nullable();
+            $table->foreign('status_id')->references('id')->on('task_statuses')->onDelete('set null');
             $table->foreign('creator_id')->references('id')->on('users');
             $table->foreign('assigned_to_id')->references('id')->on('users');
             $table->string('tags')->nullable();

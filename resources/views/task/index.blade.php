@@ -31,7 +31,7 @@
                                 <td><a href="{{ route('tasks.show', $task->id) }}">{{ Str::limit($task->description, 10) }}</a></td>
                                 <td>{{ $task->status->name ?? null }}</td>
                                 <td>{{ $task->creator->nickname }}</td>
-                                <td>{{ $task->assignedTo->nickname }}</td>
+                                <td>{{ $task->assignedTo->nickname ?? null}}</td>
                                 <td>{{ $task->tags }}</td>
                                 <td>
                                     <a class="btn btn-success" href="{{ route('tasks.edit', $task->id) }}" role="button"><i class="fas fa-edit"></i></a>

@@ -47,8 +47,8 @@ class TaskController extends Controller
     {
         $request->validated();
         $task = new Task();
-        $status = $request->input('status');
-        $assignedToUser = $request->input('assignedTo_id');
+        $status = $request->input('status_id');
+        $assignedToUser = $request->input('assigned_to_id');
         $task->status()->associate($status);
         $task->creator()->associate(\Auth::user());
         $task->assignedTo()->associate($assignedToUser);
@@ -79,7 +79,10 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return view('task.edit', compact('task'));
+        $statuses = TaskStatus::all();
+        $users = User::all();
+
+        return view('task.edit', compact('task', 'statuses', 'users'));
     }
 
     /**
