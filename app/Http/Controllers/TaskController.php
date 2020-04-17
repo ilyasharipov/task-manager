@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Task;
 use App\TaskStatus;
 use App\User;
+use App\Tag;
 use App\Http\Requests\StoreTaskPost;
 use Illuminate\Http\Request;
 
@@ -33,8 +34,9 @@ class TaskController extends Controller
         $task = new Task();
         $statuses = TaskStatus::all();
         $users = User::all();
+        $tags = Tag::all();
 
-        return view('task.create', compact('task', 'statuses', 'users'));
+        return view('task.create', compact('task', 'statuses', 'users', 'tags'));
     }
 
     /**
@@ -47,13 +49,23 @@ class TaskController extends Controller
     {
         $request->validated();
         $task = new Task();
+
         $status = $request->input('status_id');
         $assignedToUser = $request->input('assigned_to_id');
         $task->status()->associate($status);
         $task->creator()->associate(\Auth::user());
         $task->assignedTo()->associate($assignedToUser);
-        $task->fill($request->all());
+        $task->fill($request->except(['tags']));
         $task->save();
+
+        if ($request->input('tags')) {
+            $tagsId = [];
+            foreach ($request->input('tags') as $tag) {
+                $tagData = Tag::firstOrCreate(['name' => $tag]);
+                $tagsId[] = $tagData->id;
+            }
+            $task->tags()->sync($tagsId);
+        }
 
         flash('Create sucessful!')->success();
         return redirect()

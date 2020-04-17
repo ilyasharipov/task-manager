@@ -30,11 +30,15 @@
                         </tr>
                         <tr>
                             <th>Assigned to</th>
-                            <td>{{ $task->assignedTo->nickname }}</td>
+                            <td>{{ $task->assignedTo->nickname ?? null }}</td>
                         </tr>
                         <tr>
                             <th>Tags</th>
-                            <td>{{ $task->tags }}</td>
+                            <td>
+                                @foreach ($task->tags as $tag)
+                                        <span class="badge badge-primary">{{ $tag->name }}</span>
+                                @endforeach
+                            </td>
                         </tr>
                     </table>
                 </div>

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .select2:focus {
+  color: red;
+}
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -45,7 +50,7 @@
                                 <select class="form-control @error('status_id') is-invalid @enderror" id="status_id" name="status_id" value="{{ old('status_id') }}">
                                     <option value="">Select</option>
                                     @foreach($statuses as $status)
-                                        <option value="{{ $status->id }} ">{{ $status->name }}</option>
+                                        <option value="{{ $status->id }}">{{ $status->name }}</option>
                                     @endforeach
                                 </select>
 
@@ -74,6 +79,24 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="tags" class="col-md-4 col-form-label text-md-right">Add tags</label>
+                            <div class="col-md-6">
+                                <select class="simple-select2 form-control @error('tags') is-invalid @enderror" id="tags" multiple="multiple" name="tags[]">
+                                    @foreach ($tags as $tag)
+                                        <option>{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+                            
+                                @error('tags')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+                        </div>
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

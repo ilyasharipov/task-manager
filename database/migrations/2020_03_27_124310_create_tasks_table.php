@@ -23,7 +23,6 @@ class CreateTasksTable extends Migration
             $table->foreign('status_id')->references('id')->on('task_statuses')->onDelete('set null');
             $table->foreign('creator_id')->references('id')->on('users');
             $table->foreign('assigned_to_id')->references('id')->on('users');
-            $table->string('tags')->nullable();
             $table->timestamps();
         });
     }

@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+require('jquery-ujs');
+require('select2/dist/js/select2');
 
 window.Vue = require('vue');
 
@@ -32,4 +34,16 @@ const app = new Vue({
 });
 
 window.$ = window.jQuery = require('jquery');
-require('jquery-ujs');
+
+$(function () {
+    $('.simple-select2').each(function () {
+      $(this).select2({
+        tags: 'true',
+        formatSelectionCssClass: 'black',
+        theme: 'classic',
+        width: '100%',
+        placeholder: $(this).attr('placeholder'),
+        allowClear: Boolean($(this).data('allow-clear')),
+      });
+    });
+  });
