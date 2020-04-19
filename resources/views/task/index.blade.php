@@ -27,8 +27,8 @@
                         <tbody>
                             <tr>
                                 <th scope="row">{{ $task->id }}</th>
-                                <td>{{ $task->name }}</td>
-                                <td><a href="{{ route('tasks.show', $task->id) }}">{{ Str::limit($task->description, 10) }}</a></td>
+                                <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a></td>
+                                <td>{{ Str::limit($task->description, 10) }}</td>
                                 <td>{{ $task->status->name ?? null }}</td>
                                 <td>{{ $task->creator->nickname }}</td>
                                 <td>{{ $task->assignedTo->nickname ?? null }}</td>

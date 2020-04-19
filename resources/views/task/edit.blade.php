@@ -85,6 +85,27 @@
                                 @enderror
                         </div>
 
+                        <div class="form-group row">
+                            <label for="tags" class="col-md-4 col-form-label text-md-right">Tag</label>
+                            <div class="col-md-6">
+                                <select class="simple-select2 form-control @error('tags') is-invalid @enderror" id="tags" multiple="multiple" name="tags[]">
+                                    @foreach ($tags as $tag)
+                                        @if (in_array($tag->name, $selectedTags))
+                                            <option selected="selected">{{ $tag->name }}</option>
+                                        @else
+                                            <option>{{ $tag->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                
+                                @error('tags')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

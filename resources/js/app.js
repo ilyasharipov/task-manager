@@ -43,7 +43,8 @@ $(function () {
         theme: 'classic',
         width: '100%',
         placeholder: $(this).attr('placeholder'),
-        allowClear: Boolean($(this).data('allow-clear')),
+        allowClear: true,
+        placeholderValue: ''
       });
     });
   });

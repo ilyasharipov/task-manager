@@ -59,6 +59,7 @@ class TaskController extends Controller
         $task->save();
 
         if ($request->input('tags')) {
+            print_r($request->input('tags'));
             $tagsId = [];
             foreach ($request->input('tags') as $tag) {
                 $tagData = Tag::firstOrCreate(['name' => $tag]);
@@ -93,8 +94,11 @@ class TaskController extends Controller
     {
         $statuses = TaskStatus::all();
         $users = User::all();
+        $tags = Tag::all();
+        $selectedTags = $task->tags->pluck('name', 'id')->all();
 
-        return view('task.edit', compact('task', 'statuses', 'users'));
+        //var_dump($selectedTags);
+        return view('task.edit', compact('task', 'statuses', 'users', 'tags', 'selectedTags'));
     }
 
     /**
@@ -107,8 +111,22 @@ class TaskController extends Controller
     public function update(StoreTaskPost $request, Task $task)
     {
         $request->validated();
-        $task->fill($request->all());
+        $task->fill($request->except(['tags']));
         $task->save();
+
+        if ($request->input('tags')) {
+            $tagsId = [];
+            foreach ($request->input('tags') as $tag) {
+                print_r($tag);
+                $tagData = Tag::updateOrCreate(['name' => $tag]);
+                $tagsId[] = $tagData->id;
+            }
+            $task->tags()->sync($tagsId);
+        }
+
+        if ($request->input('tags') === null) {
+            $task->tags()->sync([]);
+        }
 
         flash('Update sucessful!')->success();
 

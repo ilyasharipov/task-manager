@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    .select2:focus {
-  color: red;
-}
-</style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -68,7 +64,7 @@
                                 <select class="form-control @error('assigned_to_id') is-invalid @enderror" id="assigned_to_id" name="assigned_to_id" value="{{ old('assigned_to_id') }}">
                                     <option value="">Select</option>
                                     @foreach($users as $user)
-                                        <option value="{{ $user->id }} ">{{ $user->nickname }}</option>
+                                        <option value="{{ $user->id }}">{{ $user->nickname }}</option>
                                     @endforeach
                                 </select>
 
