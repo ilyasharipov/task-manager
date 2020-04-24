@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class UserTest extends TestCase
 {
     use DatabaseMigrations;
 
-    protected $user;
+    private $user;
 
     public function setUp(): void
     {
@@ -62,12 +62,10 @@ class ExampleTest extends TestCase
             'birthday' => '2020-12-20',
         ];
 
-        //print_r($this->user->toArray());
         $url = route('users.update', $this->user);
         $response = $this->patch($url, $requestData);
         $response->assertStatus(302);
         $this->user->refresh();
-        //print_r($this->user->toArray());
         $this->assertDatabaseHas('users', $expected);
     }
 

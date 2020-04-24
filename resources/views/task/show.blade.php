@@ -25,7 +25,7 @@
                             <td>{{ $task->status->name ?? null }}</td>
                         </tr>
                         <tr>
-                            <th>Gender</th>
+                            <th>Creator</th>
                             <td>{{ $task->creator->nickname }}</td>
                         </tr>
                         <tr>
