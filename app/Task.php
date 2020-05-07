@@ -15,6 +15,12 @@ class Task extends Model
         'tags'
     ];
 
+    public function scopeUserTasks($query, $user)
+    {   
+        print_r($user);
+        return $query->where('creator_id', '=', $user);
+    }
+
     public function assignedTo()
     {
         return $this->belongsTo('App\User');

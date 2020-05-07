@@ -6,6 +6,7 @@ use App\Task;
 use App\TaskStatus;
 use App\User;
 use App\Tag;
+use Auth;
 use App\Http\Requests\StoreTaskPost;
 use Illuminate\Http\Request;
 
@@ -16,12 +17,20 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::paginate();
-        $statuses = TaskStatus::paginate();
+        //$tasks = Task::paginate();
+        $tasks = Task::with('creator', 'status', 'assignedTo', 'tags');
+        $authUser = Auth::user()->id;
+        //print_r($authUser);
 
-        return view('task.index', compact('tasks', 'statuses'));
+        if ($request->has('my_tasks')) {
+            $tasks->UserTasks($authUser);
+        }
+
+        $tasks = $tasks->get();
+        //var_dump($tasks);
+        return view('task.index', compact('tasks'));
     }
 
     /**
