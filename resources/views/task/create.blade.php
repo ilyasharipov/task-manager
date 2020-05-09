@@ -44,7 +44,6 @@
                             <label for="status_id" class="col-md-4 col-form-label text-md-right">Task status</label>
                             <div class="col-md-6">
                                 <select class="form-control @error('status_id') is-invalid @enderror" id="status_id" name="status_id" value="{{ old('status_id') }}">
-                                    <option value="">Select</option>
                                     @foreach($statuses as $status)
                                         <option value="{{ $status->id }}">{{ $status->name }}</option>
                                     @endforeach
@@ -62,7 +61,6 @@
                             <label for="assigned_to_id" class="col-md-4 col-form-label text-md-right">Assigned to</label>
                             <div class="col-md-6">
                                 <select class="form-control @error('assigned_to_id') is-invalid @enderror" id="assigned_to_id" name="assigned_to_id" value="{{ old('assigned_to_id') }}">
-                                    <option value="">Select</option>
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->nickname }}</option>
                                     @endforeach

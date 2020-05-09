@@ -11,61 +11,57 @@
                 <form action="{{ route('tasks.index') }}" method="GET">
                 <table class="table">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Creator</th>
                                 <th scope="col">Assigned to</th>
-                                <th scope="col">Tags</th>
+                                <th colspan="2" scope="col">Tags</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th scope="row"></th>
-                                <td colspan="2">
+                                <td colspan="2" class="text-center">
                                     <div class="form-group">
-                                        <label class="form-check-label" for="my_tasks"></label>
-                                        <input class="form-check-input" type="checkbox" name="my_tasks" id="my_tasks">My task
+                                        <input class="form-check-input" value="on" type="checkbox" name="my_tasks" id="my_tasks" {{ Request::get('my_tasks') == 'on' ? 'checked' : '' }}>My task
                                     </div>
                                 </td>  
                                 <td>
                                     <div class="form-group">
-                                        <label for="status"></label>
-                                        <select class="form-control" id="status" name="">
-                                            <option name=""></option>
+                                        <select class="form-control" id="status_id" name="status_id">
+                                        <option value="">Select</option>
+                                            @foreach($statuses as $status)
+                                                <option value="{{ $status->id }}" {{ Request::get('status_id') == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <label for="status"></label>
-                                        <select class="form-control" id="status" name="">
-                                            <option name=""></option>
+                                        <select class="form-control" id="assigned_to_id" name="assigned_to_id">
+                                            <option value="">Select</option>
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}" {{ Request::get('assigned_to_id') == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
+                                            @endforeach
                                         </select>
-                                    </div>
+                                    <div>
                                 </td>
-                                <td>
+                                <td colspan="2">
                                     <div class="form-group">
-                                        <label for="status"></label>
-                                        <select class="form-control" id="status" name="">
-                                            <option name=""></option>
+                                        <select class="form-control" id="tag" name="tag">
+                                            <option value="">Select</option>
+                                                @foreach ($tags as $tag)
+                                                    <option value="{{ $tag->name }}" {{ Request::get('tag') == $tag->name ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                                @endforeach
                                         </select>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="form-group">
-                                        <label for="status"></label>
-                                        <select class="form-control" id="" name="">
-                                            <option name=""></option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
+                                <td class="text-center">
                                     <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
-                                    <a class="btn btn-danger" role="submit" href="" data-method="delete" data-confirm="Are you sure?" rel="nofollow"><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-secondary" href="{{ route('tasks.index') }}" role="button"><i class="fas fa-sync"></i></i></a>
                                 </td>
                             </tr>
                             @foreach ($tasks as $task)
@@ -74,14 +70,13 @@
                                     <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a></td>
                                     <td>{{ Str::limit($task->description, 10) }}</td>
                                     <td>{{ $task->status->name ?? null }}</td>
-                                    <td>{{ $task->creator->nickname }}</td>
                                     <td>{{ $task->assignedTo->nickname ?? null }}</td>
-                                    <td>
+                                    <td colspan="2">
                                         @foreach ($task->tags as $tag)
                                             <span class="badge badge-primary">{{ $tag->name }}</span>
                                         @endforeach
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <a class="btn btn-success" href="{{ route('tasks.edit', $task->id) }}" role="button"><i class="fas fa-edit"></i></a>
                                         <a class="btn btn-danger" role="submit" href="{{ route('tasks.destroy', $task->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow"><i class="fas fa-trash"></i></a>
                                     </td>
@@ -90,7 +85,7 @@
                         </tbody>
                     </table>
                 <form>
-            
+            {{ $tasks->links() }}
         </div>
     </div>
 </div>

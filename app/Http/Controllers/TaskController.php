@@ -28,9 +28,26 @@ class TaskController extends Controller
             $tasks->UserTasks($authUser);
         }
 
-        $tasks = $tasks->get();
+        if ($request->has('status_id')) {
+            $tasks->TaskWithStatus($request->status_id);
+        }
+
+        if ($request->has('assigned_to_id')) {
+            $tasks->AssignedToTasks($request->assigned_to_id);
+        }
+        
+        if ($request->has('tag')) {
+            if (!$request->has('tag')) return;
+            $tasks->Tag($request->tag);
+        }
+
+        $statuses = TaskStatus::all();
+        $users = User::all();
+        $tags = Tag::all();
+
+        $tasks = $tasks->paginate();
         //var_dump($tasks);
-        return view('task.index', compact('tasks'));
+        return view('task.index', compact('tasks', 'statuses', 'users', 'tags'));
     }
 
     /**
