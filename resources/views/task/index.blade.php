@@ -31,20 +31,20 @@
                                 </td>  
                                 <td>
                                     <div class="form-group">
-                                        <select class="form-control" id="status_id" name="status_id">
+                                        <select class="form-control" id="status" name="status">
                                         <option value="">Select</option>
                                             @foreach($statuses as $status)
-                                                <option value="{{ $status->id }}" {{ Request::get('status_id') == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
+                                                <option value="{{ $status->id }}" {{ Request::get('status') == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <select class="form-control" id="assigned_to_id" name="assigned_to_id">
+                                        <select class="form-control" id="assigned_to" name="assigned_to">
                                             <option value="">Select</option>
                                             @foreach($users as $user)
-                                                <option value="{{ $user->id }}" {{ Request::get('assigned_to_id') == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
+                                                <option value="{{ $user->id }}" {{ Request::get('assigned_to') == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
                                             @endforeach
                                         </select>
                                     <div>

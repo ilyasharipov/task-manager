@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\TaskFilter;
+
 use App\Task;
 use App\TaskStatus;
 use App\User;
@@ -19,34 +21,14 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        //$tasks = Task::paginate();
         $tasks = Task::with('creator', 'status', 'assignedTo', 'tags');
-        $authUser = Auth::user()->id;
-        //print_r($authUser);
-
-        if ($request->has('my_tasks')) {
-            $tasks->UserTasks($authUser);
-        }
-
-        if ($request->has('status_id')) {
-            $tasks->TaskWithStatus($request->status_id);
-        }
-
-        if ($request->has('assigned_to_id')) {
-            $tasks->AssignedToTasks($request->assigned_to_id);
-        }
-        
-        if ($request->has('tag')) {
-            if (!$request->has('tag')) return;
-            $tasks->Tag($request->tag);
-        }
 
         $statuses = TaskStatus::all();
         $users = User::all();
         $tags = Tag::all();
 
-        $tasks = $tasks->paginate();
-        //var_dump($tasks);
+        $tasks = (new TaskFilter($tasks, $request))->apply()->paginate();
+
         return view('task.index', compact('tasks', 'statuses', 'users', 'tags'));
     }
 
