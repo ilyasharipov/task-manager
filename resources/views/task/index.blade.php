@@ -26,7 +26,7 @@
                                 <th scope="row"></th>
                                 <td colspan="2" class="text-center">
                                     <div class="form-group">
-                                        <input class="form-check-input" value="on" type="checkbox" name="my_tasks" id="my_tasks" {{ Request::get('my_tasks') == 'on' ? 'checked' : '' }}>My task
+                                        <input class="form-check-input" value="on" type="checkbox" name="myTasks" id="myTasks" {{ Request::get('myTasks') == 'on' ? 'checked' : '' }}>My task
                                     </div>
                                 </td>  
                                 <td>
@@ -41,10 +41,10 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <select class="form-control" id="assigned_to" name="assigned_to">
+                                        <select class="form-control" id="assignedTo" name="assignedTo">
                                             <option value="">Select</option>
                                             @foreach($users as $user)
-                                                <option value="{{ $user->id }}" {{ Request::get('assigned_to') == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
+                                                <option value="{{ $user->id }}" {{ Request::get('assignedTo') == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
                                             @endforeach
                                         </select>
                                     <div>

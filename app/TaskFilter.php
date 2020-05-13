@@ -29,7 +29,7 @@ class TaskFilter
         return $this->request->all();
     }
 
-    public function my_tasks()
+    public function myTasks()
     {
         $authUser = \Auth::user()->id;
         return $this->builder->UserTasks($authUser);
@@ -40,7 +40,7 @@ class TaskFilter
         return $this->builder->TaskWithStatus($value);
     }
 
-    public function assigned_to($value)
+    public function assignedTo($value)
     {
         
         return $this->builder->AssignedToTasks($value);
@@ -54,5 +54,4 @@ class TaskFilter
         
         return $this->builder->Tag($value);
     }
-
 }

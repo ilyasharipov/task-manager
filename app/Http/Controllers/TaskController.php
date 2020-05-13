@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\TaskFilter;
-
 use App\Task;
 use App\TaskStatus;
 use App\User;
