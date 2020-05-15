@@ -8,6 +8,7 @@
             <div class="card-header"><h3><i class="fas fa-tasks"></i>  Tasks</h3></div>
                 <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('tasks.create') }}" role="button"><i class="fas fa-plus-circle"></i>  Create task</a>
                 <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('taskstatuses.index') }}" role="button"><i class="fas fa-cogs"></i>  Status settings</a>
+                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('tags.index') }}" role="button"><i class="fas fa-tags"></i>  Tag settings</a>
                 <form action="{{ route('tasks.index') }}" method="GET">
                 <table class="table">
                         <thead>

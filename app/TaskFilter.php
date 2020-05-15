@@ -37,6 +37,10 @@ class TaskFilter
 
     public function status($value)
     {
+        if (!$value) {
+            return;
+        }
+
         return $this->builder->TaskWithStatus($value);
     }
 
