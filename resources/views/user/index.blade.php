@@ -17,7 +17,7 @@
                     @foreach ($users as $user)
                         <tbody>
                             <tr>
-                                <th scope="row">{{ $user->id }}</th>
+                                <th scope="row">{{ $loop->iteration }}</th>
                                 <td><a href="{{ route('users.show', $user->id) }}">{{ $user->nickname}}</a></td>
                                 <td>{{ $user->created_at}}</td>
                             </tr>

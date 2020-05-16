@@ -67,7 +67,7 @@
                             </tr>
                             @foreach ($tasks as $task)
                                 <tr>
-                                    <th scope="row">{{ $task->id }}</th>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a></td>
                                     <td>{{ Str::limit($task->description, 10) }}</td>
                                     <td>{{ $task->status->name ?? null }}</td>
