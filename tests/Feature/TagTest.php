@@ -47,5 +47,4 @@ class TagTest extends TestCase
         $response = $this->post(route('tags.store', $requestData));
         $this->assertDatabaseHas('tags', $requestData);
     }
-
 }

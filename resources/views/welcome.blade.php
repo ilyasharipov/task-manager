@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Task manager</title>
+        <title>@lang('welcome.title')</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -71,12 +71,12 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}"><i class="fas fa-home"></i>  Home</a>
+                        <a href="{{ url('/home') }}"><i class="fas fa-home"></i>  @lang('welcome.home')</a>
                     @else
-                        <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i>  Login</a>
+                        <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i>  @lang('welcome.login')</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}"><i class="fas fa-user-plus"></i>  Register</a>
+                            <a href="{{ route('register') }}"><i class="fas fa-user-plus"></i>  @lang('welcome.register')</a>
                         @endif
                     @endauth
                 </div>
@@ -84,7 +84,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                <i class="fas fa-thumbtack"></i>  Task-Manager
+                <i class="fas fa-thumbtack"></i>  @lang('welcome.task_manager') 
                 </div>
             </div>
         </div>

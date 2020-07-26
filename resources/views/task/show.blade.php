@@ -13,27 +13,27 @@
                             <td>{{ $task->id }}</td>
                         </tr>
                         <tr>
-                            <th>Name</th>
+                            <th>@lang('tasks.name')</th>
                             <td>{{ $task->name }}</td>
                         </tr>
                         <tr>
-                            <th>Description</th>
+                            <th>@lang('tasks.description')</th>
                             <td>{{ $task->description }}</td>
                         </tr>
                         <tr>
-                            <th>Status</th>
+                            <th>@lang('tasks.status')</th>
                             <td>{{ $task->status->name ?? null }}</td>
                         </tr>
                         <tr>
-                            <th>Creator</th>
+                            <th>@lang('tasks.creator')</th>
                             <td>{{ $task->creator->nickname }}</td>
                         </tr>
                         <tr>
-                            <th>Assigned to</th>
+                            <th>@lang('tasks.assigned_to')</th>
                             <td>{{ $task->assignedTo->nickname ?? null }}</td>
                         </tr>
                         <tr>
-                            <th>Tags</th>
+                            <th>@lang('tasks.tags')</th>
                             <td>
                                 @foreach ($task->tags as $tag)
                                         <span class="badge badge-primary">{{ $tag->name }}</span>

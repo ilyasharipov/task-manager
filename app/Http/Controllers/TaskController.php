@@ -66,7 +66,7 @@ class TaskController extends Controller
         $task->save();
 
         if ($request->input('tags')) {
-            print_r($request->input('tags'));
+            // print_r($request->input('tags'));
             $tagsId = [];
             foreach ($request->input('tags') as $tag) {
                 $tagData = Tag::firstOrCreate(['name' => $tag]);

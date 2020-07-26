@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_token" />
 
-    <title>Task-Manager</title>
+    <title>@lang('app.title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -26,7 +26,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <i class="fas fa-thumbtack"></i>
-                    Task-Manager
+                    @lang('app.task_manager')
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -36,11 +36,17 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @if (Auth::user())
-                            <a class="nav-link" href="{{ route('users.index') }}"><i class="fa fa-users" aria-hidden="false"></i>  Users</a> <!--именованный роутинг -->
-                            <a class="nav-link" href="{{ route('tasks.index') }}"><i class="fas fa-tasks"></i>  Tasks</a> <!--именованный роутинг -->
+                            <a class="nav-link" href="{{ route('users.index') }}"><i class="fa fa-users" aria-hidden="false"></i>  @lang('app.users')</a>
+                            <a class="nav-link" href="{{ route('tasks.index') }}"><i class="fas fa-tasks"></i> @lang('app.tasks')</a>
                         @endif
                     </ul>
-
+                    <ul class="navbar-nav ml-auto">
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            &nbsp;<a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                        @endforeach
+                    </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -63,8 +69,8 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-header text-secondary font-weight-bold text-decoration-none" href="{{ route('users.show', Auth::user()->id) }}">{{ Auth::user()->name }}</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('users.edit', [Auth::user(), 'type' => 'edit_profile']) }}">Edit profile</a>
-                                    <a class="dropdown-item" href="{{ route('users.edit', [Auth::user(), 'type' => 'change_password']) }}">Change password</a>
+                                    <a class="dropdown-item" href="{{ route('users.edit', [Auth::user(), 'type' => 'edit_profile']) }}">@lang('app.edit_profile')</a>
+                                    <a class="dropdown-item" href="{{ route('users.edit', [Auth::user(), 'type' => 'change_password']) }}">@lang('app.change_password')</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

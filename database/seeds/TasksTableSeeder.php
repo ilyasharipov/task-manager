@@ -18,7 +18,7 @@ class TasksTableSeeder extends Seeder
         $tags = App\Tag::all();
         factory(App\Task::class, 100)->create()->each(function (App\Task $task) use ($tags) {
             $task->tag()->attach(
-                $tags ->random(rand(1, 5))
+                $tags->random(rand(1, 5))
             );
         });
     }

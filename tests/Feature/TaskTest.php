@@ -4,14 +4,13 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\withoutExceptionHandling;
-use App\Task;
+// use Illuminate\Foundation\Testing\WithoutMiddleware;
+// use Illuminate\Foundation\Testing\withoutExceptionHandling;
+// use App\Task;
 use App\User;
+use App\Task;
 use App\TaskStatus;
 use Tests\TestCase;
-
-// вещь для проверки ошибок ---> $this->withoutExceptionHandling();
 
 class TaskTest extends TestCase
 {
@@ -30,11 +29,10 @@ class TaskTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
         $this->user = factory(User::class)->create();
         $this->actingAs($this->user);
-        $this->task = factory(Task::class)->create();
         $this->taskStatus = TaskStatus::create(['name' => 'new']);
+        $this->task = factory(Task::class)->create();
     }
 
     public function testTasksIndex()

@@ -5,13 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-            <div class="card-header"><h3><i class="fa fa-users" aria-hidden="false"></i>  Users</h3></div>
+            <div class="card-header"><h3><i class="fa fa-users" aria-hidden="false"></i>  @lang('users.header')</h3></div>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nickname</th>
-                            <th scope="col">Data registation</th>
+                            <th scope="col">@lang('users.nickname')</th>
+                            <th scope="col">@lang('users.data_reg')</th>
                         </tr>
                     </thead>
                     @foreach ($users as $user)

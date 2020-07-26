@@ -13,18 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    //\Log::debug('Test debug message');
-    return view('welcome');
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localizationRedirect', 'localeViewPath' ]
+], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Auth::routes();
+
+    Route::middleware(['auth'])->group(function () {
+        Route::resource('/users', 'UserController', ['except' => ['create', 'store']]);
+        Route::resource('/tasks', 'TaskController');
+        Route::resource('/taskstatuses', 'TaskStatusController', ['except' => ['show']]);
+        Route::resource('/tags', 'TagController', ['except' => ['show', 'update', 'edit']]);
+    });
+
+    Route::get('/home', 'HomeController@index')->name('home');
 });
-
-Auth::routes();
-
-Route::middleware(['auth'])->group(function () {
-    Route::resource('/users', 'UserController', ['except' => ['create', 'store']]);
-    Route::resource('/tasks', 'TaskController');
-    Route::resource('/taskstatuses', 'TaskStatusController', ['except' => ['show']]);
-    Route::resource('/tags', 'TagController', ['except' => ['show', 'update', 'edit']]);
-});
-
-Route::get('/home', 'HomeController@index')->name('home');

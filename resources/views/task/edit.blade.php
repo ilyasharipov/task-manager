@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Update task') }}</div>
+                <div class="card-header">@lang('tasks.update')}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('tasks.update', $task->id) }}">
@@ -13,7 +13,7 @@
                         @method('PATCH')
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">@lang('tasks.name')</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $task->name }}" required autocomplete="name" autofocus>
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
+                            <label for="description" class="col-md-4 col-form-label text-md-right">@lang('tasks.description')</label>
 
                             <div class="col-md-6">
                                 <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" rows="3">{{ $task->description }}</textarea>
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="status_id" class="col-md-4 col-form-label text-md-right">Task status</label>
+                            <label for="status_id" class="col-md-4 col-form-label text-md-right">@lang('tasks.status')</label>
                             <div class="col-md-6">
                                 <select class="form-control @error('status_id') is-invalid @enderror" id="status_id" name="status_id" value="{{ $task->status_id ?? null }}">
                                     @foreach($statuses as $status)
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="assigned_to_id" class="col-md-4 col-form-label text-md-right">Assigned to</label>
+                            <label for="assigned_to_id" class="col-md-4 col-form-label text-md-right">@lang('tasks.assigned_to')</label>
                             <div class="col-md-6">
                                 <select class="form-control @error('assigned_to_id') is-invalid @enderror" id="assigned_to_id" name="assigned_to_id" value="{{ $task->assigned_to_id ?? null }}">
                                     @foreach($users as $user)
@@ -107,7 +107,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Update') }}
+                                    @lang('tasks.update')
                                 </button>
                             </div>
                         </div>

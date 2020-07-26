@@ -5,21 +5,21 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card-header"><h3><i class="fas fa-tasks"></i>  Tasks</h3></div>
-                <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('tasks.create') }}" role="button"><i class="fas fa-plus-circle"></i>  Create task</a>
-                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('taskstatuses.index') }}" role="button"><i class="fas fa-cogs"></i>  Status settings</a>
-                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('tags.index') }}" role="button"><i class="fas fa-tags"></i>  Tag settings</a>
+            <div class="card-header"><h3><i class="fas fa-tasks"></i>  @lang('tasks.tasks')</h3></div>
+                <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('tasks.create') }}" role="button"><i class="fas fa-plus-circle"></i>  @lang('tasks.create')</a>
+                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('taskstatuses.index') }}" role="button"><i class="fas fa-cogs"></i>  @lang('tasks.status_sitting')</a>
+                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('tags.index') }}" role="button"><i class="fas fa-tags"></i>  @lang('tasks.tag_sitting')</a>
                 <form action="{{ route('tasks.index') }}" method="GET">
                 <table class="table">
                         <thead>
                             <tr class="text-center">
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Assigned to</th>
-                                <th colspan="2" scope="col">Tags</th>
-                                <th scope="col">Actions</th>
+                                <th scope="col">@lang('tasks.name')</th>
+                                <th scope="col">@lang('tasks.description')</th>
+                                <th scope="col">@lang('tasks.status')</th>
+                                <th scope="col">@lang('tasks.assigned_to')</th>
+                                <th colspan="2" scope="col">@lang('tasks.tags')</th>
+                                <th scope="col">@lang('tasks.actions')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,13 +27,13 @@
                                 <th scope="row"></th>
                                 <td colspan="2" class="text-center">
                                     <div class="form-group">
-                                        <input class="form-check-input" value="on" type="checkbox" name="myTasks" id="myTasks" {{ Request::get('myTasks') == 'on' ? 'checked' : '' }}>My task
+                                        <input class="form-check-input" value="on" type="checkbox" name="myTasks" id="myTasks" {{ Request::get('myTasks') == 'on' ? 'checked' : '' }}>@lang('tasks.my_task')
                                     </div>
                                 </td>  
                                 <td>
                                     <div class="form-group">
                                         <select class="form-control" id="status" name="status">
-                                        <option value="">Select</option>
+                                        <option value="">@lang('tasks.select')</option>
                                             @foreach($statuses as $status)
                                                 <option value="{{ $status->id }}" {{ Request::get('status') == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
                                             @endforeach
@@ -43,7 +43,7 @@
                                 <td>
                                     <div class="form-group">
                                         <select class="form-control" id="assignedTo" name="assignedTo">
-                                            <option value="">Select</option>
+                                            <option value="">@lang('tasks.select')</option>
                                             @foreach($users as $user)
                                                 <option value="{{ $user->id }}" {{ Request::get('assignedTo') == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
                                             @endforeach
@@ -53,7 +53,7 @@
                                 <td colspan="2">
                                     <div class="form-group">
                                         <select class="form-control" id="tag" name="tag">
-                                            <option value="">Select</option>
+                                            <option value="">@lang('tasks.select')</option>
                                                 @foreach ($tags as $tag)
                                                     <option value="{{ $tag->name }}" {{ Request::get('tag') == $tag->name ? 'selected' : '' }}>{{ $tag->name }}</option>
                                                 @endforeach
@@ -67,7 +67,7 @@
                             </tr>
                             @foreach ($tasks as $task)
                                 <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <th scope="row">{{ ($tasks->currentPage()-1) * $tasks->perPage() + $loop->index + 1 }}</th>
                                     <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a></td>
                                     <td>{{ Str::limit($task->description, 10) }}</td>
                                     <td>{{ $task->status->name ?? null }}</td>
