@@ -20,8 +20,8 @@
                                 <tr class="text-center">
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $tag->name }}</td>
-                                    <td class="text-center"> 
-                                        <a class="btn btn-danger" role="submit" href="{{ route('tags.destroy', $tag->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow"><i class="fas fa-trash"></i></a>
+                                    <td class="text-center">
+                                        <a class="btn btn-danger" role="submit" href="{{ route('tags.destroy', $tag) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

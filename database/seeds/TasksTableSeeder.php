@@ -11,7 +11,7 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Tag::class, 20)->create()->each(function ($u) {
+        factory(Spatie\Tags\Tag::class, 20)->create()->each(function ($u) {
             $u->save();
         });
 

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Tags\HasTags;
 
 class Task extends Model
 {
+    use HasTags;
+
     protected $fillable = [
         'name',
         'description',
@@ -52,13 +55,13 @@ class Task extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function tag()
-    {
-        return $this->belongsToMany('App\Tag');
-    }
+    // public function tag()
+    // {
+    //     return $this->belongsToMany('App\Tag');
+    // }
 
-    public function tags()
-    {
-        return $this->belongsToMany('App\Tag');
-    }
+    // public function tags()
+    // {
+    //     return $this->belongsToMany('App\Tag');
+    // }
 }

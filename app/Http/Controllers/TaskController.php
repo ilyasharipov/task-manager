@@ -6,7 +6,7 @@ use App\TaskFilter;
 use App\Task;
 use App\TaskStatus;
 use App\User;
-use App\Tag;
+use Spatie\Tags\Tag;
 use Auth;
 use App\Http\Requests\StoreTaskPost;
 use Illuminate\Http\Request;
@@ -20,12 +20,11 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = Task::with('creator', 'status', 'assignedTo', 'tags');
+        $tasks = Task::with('creator', 'status', 'assignedTo');
 
         $statuses = TaskStatus::all();
         $users = User::all();
         $tags = Tag::all();
-
         $tasks = (new TaskFilter($tasks, $request))->apply()->paginate();
 
         return view('task.index', compact('tasks', 'statuses', 'users', 'tags'));
@@ -57,23 +56,16 @@ class TaskController extends Controller
         $request->validated();
         $task = new Task();
 
-        $status = $request->input('status_id');
-        $assignedToUser = $request->input('assigned_to_id');
+        $status = $request->status_id;
+        $assignedToUser = $request->assigned_to_id;
         $task->status()->associate($status);
         $task->creator()->associate(\Auth::user());
         $task->assignedTo()->associate($assignedToUser);
         $task->fill($request->except(['tags']));
         $task->save();
 
-        if ($request->input('tags')) {
-            // print_r($request->input('tags'));
-            $tagsId = [];
-            foreach ($request->input('tags') as $tag) {
-                $tagData = Tag::firstOrCreate(['name' => $tag]);
-                $tagsId[] = $tagData->id;
-            }
-            $task->tags()->sync($tagsId);
-        }
+        $tags = $request->tags;
+        $task->attachTags($tags);
 
         flash('Create sucessful!')->success();
         return redirect()
@@ -104,7 +96,6 @@ class TaskController extends Controller
         $tags = Tag::all();
         $selectedTags = $task->tags->pluck('name', 'id')->all();
 
-        //var_dump($selectedTags);
         return view('task.edit', compact('task', 'statuses', 'users', 'tags', 'selectedTags'));
     }
 
@@ -121,19 +112,8 @@ class TaskController extends Controller
         $task->fill($request->except(['tags']));
         $task->save();
 
-        if ($request->input('tags')) {
-            $tagsId = [];
-            foreach ($request->input('tags') as $tag) {
-                print_r($tag);
-                $tagData = Tag::updateOrCreate(['name' => $tag]);
-                $tagsId[] = $tagData->id;
-            }
-            $task->tags()->sync($tagsId);
-        }
-
-        if ($request->input('tags') === null) {
-            $task->tags()->sync([]);
-        }
+        $tags = $request->tags;
+        $task->syncTags($tags);
 
         flash('Update sucessful!')->success();
 
@@ -149,10 +129,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        if ($task) {
-            $task->delete();
-        }
-
+        Task::findOrFail($task->id)->delete();
         flash('Delete sucessful!')->success();
         return redirect()
             ->route('tasks.index');

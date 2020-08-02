@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\User;
-use App\Tag;
+use Spatie\Tags\Tag;
 
 class TagTest extends TestCase
 {
@@ -19,7 +19,7 @@ class TagTest extends TestCase
      */
 
     private $tag;
-    
+
     public function setUp(): void
     {
         parent::setUp();
@@ -43,8 +43,12 @@ class TagTest extends TestCase
         $requestData = [
             'name' => 'python',
         ];
-        
+
+        $equalData = [
+            'name' => "{\"ru\":\"python\"}"
+        ];
+
         $response = $this->post(route('tags.store', $requestData));
-        $this->assertDatabaseHas('tags', $requestData);
+        $this->assertDatabaseHas('tags', $equalData);
     }
 }
