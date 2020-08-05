@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
 {
@@ -19,6 +20,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters(['name'])
+            ->toSql();
+        dd($users);
         $users = User::paginate();
 
         return view('user.index', compact('users'));

@@ -20,6 +20,7 @@
         "laravelcollective/html": "^6.1",
         "mcamara/laravel-localization": "^1.5",
         "rollbar/rollbar-laravel": "^6.0",
+        "spatie/laravel-query-builder": "^2.8",
         "spatie/laravel-tags": "^2.6",
         "squizlabs/php_codesniffer": "^3.5"
     },

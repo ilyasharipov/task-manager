@@ -27,12 +27,12 @@
                                 <th scope="row"></th>
                                 <td colspan="2" class="text-center">
                                     <div class="form-group">
-                                        <input class="form-check-input" value="on" type="checkbox" name="myTasks" id="myTasks" {{ Request::get('myTasks') == 'on' ? 'checked' : '' }}>@lang('tasks.my_task')
+                                        <input class="form-check-input" value="on" type="checkbox" name="filter[creator]" id="myTasks" {{ Request::get('myTasks') == 'on' ? 'checked' : '' }}>@lang('tasks.my_task')
                                     </div>
-                                </td>  
+                                </td>
                                 <td>
                                     <div class="form-group">
-                                        <select class="form-control" id="status" name="status">
+                                        <select class="form-control" id="status" name="filter[status]">
                                         <option value="">@lang('tasks.select')</option>
                                             @foreach($statuses as $status)
                                                 <option value="{{ $status->id }}" {{ Request::get('status') == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
@@ -42,20 +42,20 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <select class="form-control" id="assignedTo" name="assignedTo">
+                                        <select class="form-control" id="assignedTo" name="filter[assignedTo]">
                                             <option value="">@lang('tasks.select')</option>
                                             @foreach($users as $user)
                                                 <option value="{{ $user->id }}" {{ Request::get('assignedTo') == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
                                             @endforeach
                                         </select>
-                                    <div>
+                                    </div>
                                 </td>
                                 <td colspan="2">
                                     <div class="form-group">
-                                        <select class="form-control" id="tag" name="tag">
+                                        <select class="form-control" id="tags" name="filter[tags]">
                                             <option value="">@lang('tasks.select')</option>
                                                 @foreach ($tags as $tag)
-                                                    <option value="{{ $tag->name }}" {{ Request::get('tag') == $tag->name ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                                    <option value="{{ $tag->name }}" {{ Request::get('tags') == $tag->name ? 'selected' : '' }}>{{ $tag->name }}</option>
                                                 @endforeach
                                         </select>
                                     </div>

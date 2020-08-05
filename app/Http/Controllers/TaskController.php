@@ -10,6 +10,8 @@ use Spatie\Tags\Tag;
 use Auth;
 use App\Http\Requests\StoreTaskPost;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
@@ -25,12 +27,26 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = Task::with('creator', 'status', 'assignedTo');
+//        $tasks = Task::with('creator', 'status', 'assignedTo');
 
         $statuses = TaskStatus::all();
         $users = User::all();
         $tags = Tag::all();
-        $tasks = (new TaskFilter($tasks, $request))->apply()->paginate();
+
+        $users = QueryBuilder::for(User::class)
+            ->allowedIncludes(['tasks'])
+            ->get();
+
+        dd($users);
+        $tasks = QueryBuilder::for(Task::class)
+            ->allowedIncludes(['creator', 'status', 'assignedTo', 'tags'])
+            ->allowedFilters(
+                AllowedFilter::exact('myTasks', 'creator_id'),
+                AllowedFilter::exact('status', 'status_id'),
+                AllowedFilter::exact('assignedTo', 'assigned_to_id'),
+                AllowedFilter::exact('tags', 'tags'))
+
+            ->paginate();
 
         return view('task.index', compact('tasks', 'statuses', 'users', 'tags'));
     }
