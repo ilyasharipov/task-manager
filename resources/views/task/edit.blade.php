@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">@lang('tasks.update')}</div>
+                <div class="card-header">@lang('tasks.update')</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('tasks.update', $task->id) }}">
@@ -72,7 +72,7 @@
                                             <option value="{{ $user->id }}">{{ $user->nickname }}</option>
                                         @endif
                                     @endforeach
-                                    
+
                                 </select>
                             </div>
 
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="tags" class="col-md-4 col-form-label text-md-right">Tag</label>
+                            <label for="tags" class="col-md-4 col-form-label text-md-right">@lang('tasks.tags')</label>
                             <div class="col-md-6">
                                 <select class="simple-select2 form-control @error('tags') is-invalid @enderror" id="tags" multiple="multiple" name="tags[]">
                                     @foreach ($tags as $tag)
@@ -95,7 +95,7 @@
                                         @endif
                                     @endforeach
                                 </select>
-                                
+
                                 @error('tags')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

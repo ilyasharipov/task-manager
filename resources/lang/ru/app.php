@@ -9,5 +9,5 @@ return [
     'register' => 'Регистрация',
     'edit_profile' => 'Редактировать профиль',
     'change_password' => 'Сменить пароль',
-    'logout' => 'Выход',
+    'logout' => 'Выйти',
 ];

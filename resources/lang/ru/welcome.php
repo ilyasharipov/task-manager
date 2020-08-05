@@ -2,7 +2,7 @@
 
 return [
     'title' => 'Менеджер задач',
-    'home' => 'Home',
+    'home' => 'К началу',
     'login' => 'Логин',
     'register' => 'Регистрация',
     'task_manager' => 'Менеджер задач'
