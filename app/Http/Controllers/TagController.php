@@ -47,7 +47,7 @@ class TagController extends Controller
         $tag->fill($request->all());
         $tag->save();
 
-        flash('Create sucessful!')->success();
+        flash(__('tags.created'))->success();
         return redirect()
             ->route('tags.index');
     }
@@ -61,7 +61,8 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        flash('Delete sucessful!')->success();
+
+        flash(__('tags.deleted'))->success();
         return redirect()
             ->route('tags.index');
     }

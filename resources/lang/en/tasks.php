@@ -13,12 +13,10 @@ return [
     'actions' => 'Actions',
     'select' => 'Select',
     'my_task' => 'My task',
-    'create' => 'Create task',
-    'name' => 'Name',
-    'description' => 'Description',
-    'status' => 'Task status',
     'add' => 'Add tags',
     'creator' => 'Creator',
-    'tags' => 'Tags',
-    'Update' => 'Update'
+    'update' => 'Update',
+    'deleted' => 'Delete sucessful!',
+    'created' => 'Create sucessful!',
+    'updated' => 'Update sucessful!'
 ];

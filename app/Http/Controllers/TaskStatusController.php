@@ -46,7 +46,7 @@ class TaskStatusController extends Controller
         $taskstatus->fill($request->all());
         $taskstatus->save();
 
-        flash('Create sucessful!')->success();
+        flash(__('taskStatuses.created'))->success();
         return redirect()
             ->route('taskstatuses.index');
     }
@@ -78,8 +78,7 @@ class TaskStatusController extends Controller
         $taskstatus->fill($request->all());
         $taskstatus->save();
 
-        flash('Update sucessful!')->success();
-
+        flash(__('taskStatuses.updated'))->success();
         return redirect()
             ->route('taskstatuses.index');
     }
@@ -96,7 +95,7 @@ class TaskStatusController extends Controller
             $taskstatus->delete();
         }
 
-        flash('Delete sucessful!')->success();
+        flash(__('taskStatuses.deleted'))->success();
         return redirect()
             ->route('taskstatuses.index');
     }

@@ -67,7 +67,7 @@ class TaskController extends Controller
         $tags = $request->tags;
         $task->attachTags($tags);
 
-        flash('Create sucessful!')->success();
+        flash(__('tasks.created'))->success();
         return redirect()
             ->route('tasks.index');
     }
@@ -115,8 +115,7 @@ class TaskController extends Controller
         $tags = $request->tags;
         $task->syncTags($tags);
 
-        flash('Update sucessful!')->success();
-
+        flash(__('tasks.updated'))->success();
         return redirect()
             ->route('tasks.index');
     }
@@ -130,7 +129,8 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         Task::findOrFail($task->id)->delete();
-        flash('Delete sucessful!')->success();
+
+        flash(__('tasks.deleted'))->success();
         return redirect()
             ->route('tasks.index');
     }
