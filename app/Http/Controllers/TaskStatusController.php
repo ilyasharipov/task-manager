@@ -45,7 +45,7 @@ class TaskStatusController extends Controller
     {
         $taskstatus = new TaskStatus();
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'min:3', 'string', 'max:255'],
         ]);
 
         $taskstatus->fill($request->all());
