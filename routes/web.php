@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,15 +33,4 @@ Route::group([
     });
 
     Route::get('/home', 'HomeController@index')->name('home');
-});
-
-
-
-
-Route::get('/new', function () {
-    $users = QueryBuilder::for(User::class)
-        ->allowedIncludes(['tasks'])
-        ->allowedFilters('name')
-        ->toSql();
-    return $users;
 });
