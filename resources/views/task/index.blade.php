@@ -27,17 +27,18 @@
                                 <th scope="row"></th>
                                 <td colspan="2" class="text-center">
                                     <div class="form-group">
-                                        <input class="form-check-input" value="on" type="checkbox" name="filter[creator]" id="myTasks" {{ Request::get('myTasks') == 'on' ? 'checked' : '' }}>@lang('tasks.my_task')
+                                        <input class="form-check-input" type="checkbox" name="filter[myTasks]" id="myTasks" {{ isset($filters['myTasks']) == 'on' ? 'checked' : '' }}>@lang('tasks.my_task')
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="form-group">
-                                        <select class="form-control" id="status" name="filter[status]">
-                                        <option value="">@lang('tasks.select')</option>
-                                            @foreach($statuses as $status)
-                                                <option value="{{ $status->id }}" {{ Request::get('status') == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
+                               <td>
+                                   <div class="form-group">
+                                       <select class="form-control" id="status" name="filter[status]">
+                                       <option value="">@lang('tasks.select')</option>
+                                           @foreach($statuses as $status)
+                                               <option value="{{ $status->id }}" {{ $filters['status'] == $status->id ? 'selected' : 'off' }}>{{ $status->name }}</option>
                                             @endforeach
                                         </select>
+                                       <div>{{ Request::get('filter[status]') }}</div>
                                     </div>
                                 </td>
                                 <td>
@@ -45,7 +46,7 @@
                                         <select class="form-control" id="assignedTo" name="filter[assignedTo]">
                                             <option value="">@lang('tasks.select')</option>
                                             @foreach($users as $user)
-                                                <option value="{{ $user->id }}" {{ Request::get('assignedTo') == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
+                                                <option value="{{ $user->id }}" {{ $filters['assignedTo'] == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -55,14 +56,14 @@
                                         <select class="form-control" id="tags" name="filter[tags]">
                                             <option value="">@lang('tasks.select')</option>
                                                 @foreach ($tags as $tag)
-                                                    <option value="{{ $tag->name }}" {{ Request::get('tags') == $tag->name ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                                    <option value="{{ $tag->id }}" {{  $filters['tags'] == $tag->id ? 'selected' : '' }}>{{ $tag->name }}</option>
                                                 @endforeach
                                         </select>
                                     </div>
                                 </td>
                                 <td class="text-center">
                                     <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
-                                    <a class="btn btn-secondary" href="{{ route('tasks.index') }}" role="button"><i class="fas fa-sync"></i></i></a>
+                                    <a class="btn btn-secondary" href="{{ route('tasks.index') }}" role="button"><i class="fas fa-sync"></i></a>
                                 </td>
                             </tr>
                             @foreach ($tasks as $task)

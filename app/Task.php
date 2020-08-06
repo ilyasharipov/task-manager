@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Tags\HasTags;
+use Illuminate\Support\Facades\Auth;
 
 class Task extends Model
 {
@@ -18,25 +19,16 @@ class Task extends Model
         'tags'
     ];
 
-    public function scopeUserTasks($query, $user)
+    public function scopeUserTasks($query)
     {
-        return $query->where('creator_id', 'like', "%$user%");
+        $authUser = Auth::user()->id;
+        return $query->where('creator_id', 'like', "%$authUser%");
     }
 
-    public function scopeTaskWithStatus($query, $status)
+    public function scopeFindTags($query, $name)
     {
-        return $query->where('status_id', 'like', "%$status%");
-    }
-
-    public function scopeAssignedToTasks($query, $assignedTo)
-    {
-        return $query->where('assigned_to_id', 'like', "%$assignedTo%");
-    }
-
-    public function scopeTag($query, $tag)
-    {
-        return $query->whereHas('tags', function ($query) use ($tag) {
-            return $query->where('name', 'like', "%$tag%");
+        return $query->whereHas('tags', function ($query) use ($name) {
+            return $query->where('id', 'like', "%$name%");
         });
     }
 

@@ -27,28 +27,21 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-//        $tasks = Task::with('creator', 'status', 'assignedTo');
-
         $statuses = TaskStatus::all();
         $users = User::all();
         $tags = Tag::all();
+        $filters = $request->query('filter');
 
-        $users = QueryBuilder::for(User::class)
-            ->allowedIncludes(['tasks'])
-            ->get();
-
-        dd($users);
         $tasks = QueryBuilder::for(Task::class)
-            ->allowedIncludes(['creator', 'status', 'assignedTo', 'tags'])
+            ->allowedIncludes(['status', 'assignedTo', 'tags'])
             ->allowedFilters(
-                AllowedFilter::exact('myTasks', 'creator_id'),
+                AllowedFilter::scope('myTasks', 'user_tasks'),
                 AllowedFilter::exact('status', 'status_id'),
                 AllowedFilter::exact('assignedTo', 'assigned_to_id'),
-                AllowedFilter::exact('tags', 'tags'))
-
+                AllowedFilter::scope('tags', 'find_tags')
+            )
             ->paginate();
-
-        return view('task.index', compact('tasks', 'statuses', 'users', 'tags'));
+        return view('task.index', compact('tasks', 'statuses', 'users', 'tags', 'filters'));
     }
 
     /**
