@@ -12,7 +12,6 @@
                             {{ Form::label('name', 'Name', ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
                                 {{ Form::text('name', null, ['class' => 'form-control' . ( $errors->has('name') ? ' is-invalid' : '' )]) }}
-
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -20,7 +19,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}

@@ -51,12 +51,11 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $task = new Task();
-        $statuses = TaskStatus::all();
-        $users = User::all();
-        $tags = Tag::all();
+        $statuses = TaskStatus::get()->pluck('name', 'id');
+        $users = User::get()->pluck('nickname', 'id');
+        $tags = Tag::get()->pluck('name', 'id');
 
-        return view('task.create', compact('task', 'statuses', 'users', 'tags'));
+        return view('task.create', compact('statuses', 'users', 'tags'));
     }
 
     /**

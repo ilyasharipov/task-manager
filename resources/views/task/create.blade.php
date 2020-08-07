@@ -6,18 +6,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">@lang('tasks.create')</div>
-
+                <div class="card-header">{{ __('tasks.create') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('tasks.store') }}">
-                        @csrf
-
+                    {{ Form::open(['route' => ['tasks.store'], 'method' => 'post']) }}
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">@lang('tasks.name')</label>
-
+                            {{ Form::label('name', __('tasks.name'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
+                                {{ Form::text('name', null, ['class' => 'form-control' . ( $errors->has('name') ? ' is-invalid' : '' )]) }}
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -25,13 +20,10 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-right">@lang('tasks.description')</label>
-
+                            {{ Form::label('description', __('tasks.description'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" rows="3"></textarea>
-
+                                {{ Form::textArea('description', null, ['class' => 'form-control' . ( $errors->has('description') ? ' is-invalid' : '' )]) }}
                                 @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -39,16 +31,10 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="status_id" class="col-md-4 col-form-label text-md-right">@lang('tasks.status')</label>
+                            {{ Form::label('status_id', __('tasks.status'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <select class="form-control @error('status_id') is-invalid @enderror" id="status_id" name="status_id" value="{{ old('status_id') }}">
-                                    @foreach($statuses as $status)
-                                        <option value="{{ $status->id }}">{{ $status->name }}</option>
-                                    @endforeach
-                                </select>
-
+                                {{ Form::select('status_id', $statuses, null, ['class' => 'form-control' . ( $errors->has('status_id') ? ' is-invalid' : '' )]) }}
                                 @error('status_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -56,16 +42,10 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="assigned_to_id" class="col-md-4 col-form-label text-md-right">@lang('tasks.assigned_to')</label>
+                            {{ Form::label('assigned_to_id', __('tasks.assigned_to'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <select class="form-control @error('assigned_to_id') is-invalid @enderror" id="assigned_to_id" name="assigned_to_id" value="{{ old('assigned_to_id') }}">
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->nickname }}</option>
-                                    @endforeach
-                                </select>
-
+                                {{ Form::select('assigned_to_id', $users, null, ['class' => 'form-control' . ( $errors->has('assigned_to_id') ? ' is-invalid' : '' )]) }}
                                 @error('assigned_to_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -73,16 +53,10 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="tags" class="col-md-4 col-form-label text-md-right">@lang('tasks.add')</label>
+                            {{ Form::label('tags', __('tasks.add'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <select class="simple-select2 form-control @error('tags') is-invalid @enderror" id="tags" multiple="multiple" name="tags[]">
-                                    @foreach ($tags as $tag)
-                                        <option>{{ $tag->name }}</option>
-                                    @endforeach
-                                </select>
-                            
+                                {{ Form::select('tags[]', $tags, null, ['multiple' => 'multiple', 'class' => 'simple-select2 form-control' . ( $errors->has('tags') ? ' is-invalid' : '')]) }}
                                 @error('tags')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -90,15 +64,12 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    @lang('tasks.create')
-                                </button>
+                                {{ Form::submit(__('tasks.create'), ['class' => 'btn btn-primary']) }}
                             </div>
                         </div>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
