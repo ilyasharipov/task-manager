@@ -31,17 +31,17 @@
                                 </td>
                                <td>
                                    <div class="form-group">
-                                       {{ Form::select('filter[status]', $statuses, $filters['status'], ['class' => 'form-control']) }}
+                                       {{ Form::select('filter[status]', $statuses, isset($filters['status']), ['class' => 'form-control']) }}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        {{ Form::select('filter[assignedTo]', $users, $filters['assignedTo'], ['class' => 'form-control']) }}
+                                        {{ Form::select('filter[assignedTo]', $users, isset($filters['assignedTo']), ['class' => 'form-control']) }}
                                     </div>
                                 </td>
                                 <td colspan="2">
                                     <div class="form-group">
-                                        {{ Form::select('filter[tags]', $tags, $filters['tags'], ['class' => 'form-control']) }}
+                                        {{ Form::select('filter[tags]', $tags, isset($filters['tags']), ['class' => 'form-control']) }}
                                     </div>
                                 </td>
                                 <td class="text-center">

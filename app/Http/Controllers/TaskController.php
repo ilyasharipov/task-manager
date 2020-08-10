@@ -140,9 +140,14 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        Task::findOrFail($task->id)->delete();
-        flash(__('tasks.deleted'))->success();
-        return redirect()
-            ->route('tasks.index');
+        if (Auth::user()->id == $task->creator_id) {
+            $task = Task::findOrFail($task->id);
+            if ($task) {
+                $task->delete();
+                flash(__('tasks.deleted'))->success();
+                return redirect()
+                    ->route('tasks.index');
+            }
+        }
     }
 }

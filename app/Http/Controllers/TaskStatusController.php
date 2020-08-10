@@ -96,6 +96,7 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskstatus)
     {
+        $taskstatus = TaskStatus::findOrFail($taskstatus->id);
         if ($taskstatus) {
             $taskstatus->delete();
         }
