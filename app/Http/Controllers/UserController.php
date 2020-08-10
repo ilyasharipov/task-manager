@@ -44,15 +44,8 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user)
     {
-        $typeEdit = $request['type'];
-
-        switch ($typeEdit) {
-            case 'edit_profile':
-                return view('user.edit_profile', compact('user'));
-            break;
-            case 'change_password':
-                return view('user.change_password', compact('user'));
-            break;
+        if (\Auth::user()->id === $user->id) {
+            return view('user.edit_profile', compact('user'));
         }
     }
 
@@ -65,39 +58,43 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $typeUpdate = $request['type'];
-        switch ($typeUpdate) {
-            case 'update_profile':
-                $this->validate($request, [
-                    'nickname' => ['required', 'string', 'max:255', 'unique:users,nickname,' . $user->id],
-                    'name' => ['required', 'string', 'max:255'],
-                    'lastName' => ['required', 'string', 'max:255'],
-                    'gender' => ['required', 'string'],
-                    'birthday' => ['required', 'date'],
-                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
-                ]);
+        $this->validate($request, [
+            'nickname' => ['required', 'string', 'max:255', 'unique:users,nickname,' . $user->id],
+            'name' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string'],
+            'birthday' => ['required', 'date'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+        ]);
 
-                $user->fill($request->all());
-                $user->save();
+        $user->fill($request->all());
+        $user->save();
 
-                flash('Update sucessful!')->success();
+        flash('Update sucessful!')->success();
 
-                return redirect()
-                    ->route('users.index');
-                break;
-            case 'change_password':
-                $this->validate($request, [
-                    'password' => ['required', 'string', 'min:8', 'confirmed'],
-                ]);
+        return redirect()
+            ->route('users.index');
+    }
 
-                $user->password = Hash::make($request['password']);
-                $user->save();
-
-                flash('Change password sucessful!')->success();
-                return redirect()
-                ->route('users.index');
-                break;
+    public function changePasswordHead(User $user)
+    {
+        if (\Auth::user()->id === $user->id) {
+            return view('user.change_password', compact('user'));
         }
+    }
+
+    public function changePassword(Request $request, User $user)
+    {
+        $this->validate($request, [
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user->password = Hash::make($request['password']);
+        $user->save();
+
+        flash('Change password sucessful!')->success();
+        return redirect()
+            ->route('users.index');
     }
 
     public function destroy(User $user)

@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_token" />
 
-    <title>@lang('app.title')</title>
+    <title>{{ __('app.title') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -26,7 +26,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <i class="fas fa-thumbtack"></i>
-                    @lang('app.task_manager')
+                    {{ __('app.task_manager') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -36,8 +36,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @if (Auth::user())
-                            <a class="nav-link" href="{{ route('users.index') }}"><i class="fa fa-users" aria-hidden="false"></i>  @lang('app.users')</a>
-                            <a class="nav-link" href="{{ route('tasks.index') }}"><i class="fas fa-tasks"></i> @lang('app.tasks')</a>
+                            <a class="nav-link" href="{{ route('users.index') }}"><i class="fa fa-users" aria-hidden="false"></i>  {{ __('app.users') }}</a>
+                            <a class="nav-link" href="{{ route('tasks.index') }}"><i class="fas fa-tasks"></i> {{ __('app.tasks') }}</a>
                         @endif
                     </ul>
                     <ul class="navbar-nav ml-auto">
@@ -69,13 +69,13 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-header text-secondary font-weight-bold text-decoration-none" href="{{ route('users.show', Auth::user()->id) }}">{{ Auth::user()->name }}</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('users.edit', [Auth::user(), 'type' => 'edit_profile']) }}">@lang('app.edit_profile')</a>
-                                    <a class="dropdown-item" href="{{ route('users.edit', [Auth::user(), 'type' => 'change_password']) }}">@lang('app.change_password')</a>
+                                    <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">{{ __('app.edit_profile') }}</a>
+                                    <a class="dropdown-item" href="{{ route('users.changePasswordHead', Auth::user()) }}">{{ __('app.change_password') }}</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        @lang('app.logout')
+                                        {{ __('app.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

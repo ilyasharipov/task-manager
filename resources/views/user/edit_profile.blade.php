@@ -8,18 +8,13 @@
                 <div class="card-header">@lang('users.edit_profile')</div>
 
                 <div class="card-body">
+                    {{ Form::model($user, ['route' => ['users.update', $user->id]]) }}
                     <form method="POST" action="{{ route('users.update', $user->id) }}">
-                        @csrf
-                        @method('PATCH')
-
-                        <input type="hidden" name="type" value="update_profile">
-
+                        {{ method_field('PATCH') }}
                         <div class="form-group row">
-                            <label for="nickname" class="col-md-4 col-form-label text-md-right">@lang('users.nickname')</label>
-
+                            {{ Form::label('nickname', __('users.nickname'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <input id="nickname" type="text" class="form-control @error('nickname') is-invalid @enderror" name="nickname" value="{{ $user->nickname }}" required autocomplete="nickname" autofocus>
-
+                                {{ Form::text('nickname', null, ['class' => 'form-control' . ( $errors->has('nickname') ? ' is-invalid' : '' )]) }}
                                 @error('nickname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -27,13 +22,10 @@
                                 @enderror
                             </div>
                         </div>
-                        
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">@lang('users.username')</label>
-
+                            {{ Form::label('name', __('users.username'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
-
+                                {{ Form::text('name', null, ['class' => 'form-control' . ( $errors->has('name') ? ' is-invalid' : '' )]) }}
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -41,13 +33,10 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="lastName" class="col-md-4 col-form-label text-md-right">@lang('users.lastname')</label>
-
+                            {{ Form::label('lastName', __('users.lastname'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <input id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{ $user->lastName }}" required autocomplete="lastName" autofocus>
-
+                                {{ Form::text('lastName', null, ['class' => 'form-control' . ( $errors->has('lastName') ? ' is-invalid' : '' )]) }}
                                 @error('lastName')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -55,24 +44,16 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="gender" class="col-md-4 col-form-label text-md-right">@lang('users.gender')</label>
-
+                            {{ Form::label('gender', __('users.gender'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6" >
-                                <select name="gender" class="form-control material-select" data-live-search="true" required autocomplete="gender" autofocus>
-                                    <option value="male" @if ($user->gender == "male") selected @endif >male</option>
-                                    <option value="female" @if ($user->gender == "female") selected @endif >famale</option>
-                                </select>
+                                {{ Form::select('gender', ['male"' => 'male', 'female' => 'female'], null, ['class' => 'form-control material-select']) }}
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="birthday" class="col-md-4 col-form-label text-md-right">@lang('users.birthday')</label>
-
+                            {{ Form::label('gender', __('users.birthday'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <input id="birthday" type="date" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ $user->birthday }}" required autocomplete="birthday" autofocus>
-
+                                {{ Form::date('birthday', null, ['class' => 'form-control' . ( $errors->has('birthday') ? ' is-invalid' : '' )]) }}
                                 @error('birthday')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -80,13 +61,10 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">@lang('users.email')</label>
-
+                            {{ Form::label('email', __('users.email'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
-
+                                {{ Form::email('email', null, ['class' => 'form-control' . ( $errors->has('email') ? ' is-invalid' : '' )]) }}
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -94,12 +72,9 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                @lang('users.update')
-                                </button>
+                                {{ Form::submit(__('users.update'), ['class' => 'btn btn-primary']) }}
                                 <a class="btn btn-danger" role="submit" href="{{ route('users.destroy', $user->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow">@lang('users.delete')</a>
                             </div>
                         </div>

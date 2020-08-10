@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Update task') }}</div>
+                <div class="card-header">{{ __('Update task status') }}</div>
                 <div class="card-body">
                     {{ Form::model($taskstatus, ['route' => ['taskstatuses.update', $taskstatus->id]]) }}
                         {{ method_field('PUT') }}
@@ -13,7 +13,6 @@
                             {{ Form::label('name', 'Name', ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
                                 {{ Form::text('name', null, ['class' => 'form-control' . ( $errors->has('name') ? ' is-invalid' : '' )]) }}
-
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

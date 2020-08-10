@@ -28,8 +28,7 @@ class StoreTaskPost extends FormRequest
             'description' => ['nullable', 'string', 'max:400'],
             'status_id' => ['required', 'nullable', 'string'],
             'assigned_to_id' => ['required', 'nullable', 'string'],
-            "tags"    => "array",
-            "tags.*"  => "required|string|min:2",
+            "tags.*"  => "required",
         ];
     }
 }

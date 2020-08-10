@@ -56,9 +56,13 @@
                         <div class="form-group row">
                             {{ Form::label('tags', __('tasks.add'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                {{ Form::select('tags[]', $tags, null, ['multiple' => 'multiple', 'class' => 'simple-select2 form-control' . ( $errors->has('tags') ? ' is-invalid' : '')]) }}
+                                <select class="simple-select2 form-control @error('tags') is-invalid @enderror" id="tags" multiple="multiple" name="tags[]">
+                                    @foreach ($tags as $tag)
+                                        <option>{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
                                 @error('tags')
-                                        <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                 @enderror

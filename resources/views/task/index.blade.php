@@ -1,25 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card-header"><h3><i class="fas fa-tasks"></i>  @lang('tasks.tasks')</h3></div>
-                <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('tasks.create') }}" role="button"><i class="fas fa-plus-circle"></i>  @lang('tasks.create')</a>
-                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('taskstatuses.index') }}" role="button"><i class="fas fa-cogs"></i>  @lang('tasks.status_sitting')</a>
-                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('tags.index') }}" role="button"><i class="fas fa-tags"></i>  @lang('tasks.tag_sitting')</a>
-                <form action="{{ route('tasks.index') }}" method="GET">
-                <table class="table">
+            <div class="card-header"><h3><i class="fas fa-tasks"></i>&nbsp;{{ __('tasks.tasks') }}</h3></div>
+                <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('tasks.create') }}" role="button"><i class="fas fa-plus-circle"></i>&nbsp;{{ __('tasks.create') }}</a>
+                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('taskstatuses.index') }}" role="button"><i class="fas fa-cogs"></i>&nbsp;{{ __('tasks.status_sitting') }}</a>
+                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('tags.index') }}" role="button"><i class="fas fa-tags"></i>&nbsp;{{ __('tasks.tag_sitting') }}</a>
+                {{ Form::open(['route' => ['tasks.index'], 'method' => 'get']) }}
+                    <table class="table">
                         <thead>
                             <tr class="text-center">
                                 <th scope="col">#</th>
-                                <th scope="col">@lang('tasks.name')</th>
-                                <th scope="col">@lang('tasks.description')</th>
-                                <th scope="col">@lang('tasks.status')</th>
-                                <th scope="col">@lang('tasks.assigned_to')</th>
-                                <th colspan="2" scope="col">@lang('tasks.tags')</th>
-                                <th scope="col">@lang('tasks.actions')</th>
+                                <th scope="col">{{ __('tasks.name') }}</th>
+                                <th scope="col">{{ __('tasks.description') }}</th>
+                                <th scope="col">{{ __('tasks.status') }}</th>
+                                <th scope="col">{{ __('tasks.assigned_to') }}</th>
+                                <th colspan="2" scope="col">{{ __('tasks.tags') }}</th>
+                                <th scope="col">{{ __('tasks.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,38 +26,22 @@
                                 <th scope="row"></th>
                                 <td colspan="2" class="text-center">
                                     <div class="form-group">
-                                        <input class="form-check-input" type="checkbox" name="filter[myTasks]" id="myTasks" {{ isset($filters['myTasks']) == 'on' ? 'checked' : '' }}>@lang('tasks.my_task')
+                                        {{ Form::checkbox('filter[myTasks]', 'on', isset($filters['myTasks']), ['class' => 'form-check-input']) }}&nbsp;{{ __('tasks.my_task') }}
                                     </div>
                                 </td>
                                <td>
                                    <div class="form-group">
-                                       <select class="form-control" id="status" name="filter[status]">
-                                       <option value="">@lang('tasks.select')</option>
-                                           @foreach($statuses as $status)
-                                               <option value="{{ $status->id }}" {{ $filters['status'] == $status->id ? 'selected' : 'off' }}>{{ $status->name }}</option>
-                                            @endforeach
-                                        </select>
-                                       <div>{{ Request::get('filter[status]') }}</div>
+                                       {{ Form::select('filter[status]', $statuses, $filters['status'], ['class' => 'form-control']) }}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <select class="form-control" id="assignedTo" name="filter[assignedTo]">
-                                            <option value="">@lang('tasks.select')</option>
-                                            @foreach($users as $user)
-                                                <option value="{{ $user->id }}" {{ $filters['assignedTo'] == $user->id ? 'selected' : '' }}>{{ $user->nickname }}</option>
-                                            @endforeach
-                                        </select>
+                                        {{ Form::select('filter[assignedTo]', $users, $filters['assignedTo'], ['class' => 'form-control']) }}
                                     </div>
                                 </td>
                                 <td colspan="2">
                                     <div class="form-group">
-                                        <select class="form-control" id="tags" name="filter[tags]">
-                                            <option value="">@lang('tasks.select')</option>
-                                                @foreach ($tags as $tag)
-                                                    <option value="{{ $tag->id }}" {{  $filters['tags'] == $tag->id ? 'selected' : '' }}>{{ $tag->name }}</option>
-                                                @endforeach
-                                        </select>
+                                        {{ Form::select('filter[tags]', $tags, $filters['tags'], ['class' => 'form-control']) }}
                                     </div>
                                 </td>
                                 <td class="text-center">
@@ -73,7 +56,7 @@
                                     <td>{{ Str::limit($task->description, 10) }}</td>
                                     <td>{{ $task->status->name ?? null }}</td>
                                     <td>{{ $task->assignedTo->nickname ?? null }}</td>
-                                    <td colspan="2">
+                                    <td class="text-center" colspan="2">
                                         @foreach ($task->tags as $tag)
                                             <span class="badge badge-primary">{{ $tag->name }}</span>
                                         @endforeach
@@ -86,7 +69,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                <form>
+                {{ Form::close() }}
             {{ $tasks->links() }}
         </div>
     </div>

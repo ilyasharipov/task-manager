@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\TaskFilter;
 use App\Task;
 use App\TaskStatus;
 use App\User;
@@ -27,9 +26,9 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $statuses = TaskStatus::all();
-        $users = User::all();
-        $tags = Tag::all();
+        $statuses = TaskStatus::get()->pluck('name', 'id');
+        $users = User::get()->pluck('name', 'id');
+        $tags = Tag::get()->pluck('name', 'id');
         $filters = $request->query('filter');
 
         $tasks = QueryBuilder::for(Task::class)
@@ -53,7 +52,7 @@ class TaskController extends Controller
     {
         $statuses = TaskStatus::get()->pluck('name', 'id');
         $users = User::get()->pluck('nickname', 'id');
-        $tags = Tag::get()->pluck('name', 'id');
+        $tags = Tag::all();
 
         return view('task.create', compact('statuses', 'users', 'tags'));
     }
@@ -104,8 +103,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        $statuses = TaskStatus::all();
-        $users = User::all();
+        $statuses = TaskStatus::get()->pluck('name', 'id');
+        $users = User::get()->pluck('nickname', 'id');
         $tags = Tag::all();
         $selectedTags = $task->tags->pluck('name', 'id')->all();
 
@@ -142,7 +141,6 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         Task::findOrFail($task->id)->delete();
-
         flash(__('tasks.deleted'))->success();
         return redirect()
             ->route('tasks.index');

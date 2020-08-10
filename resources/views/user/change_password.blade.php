@@ -5,21 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">@lang('users.change')</div>
-
+                <div class="card-header">{{ __('users.change') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.update', $user->id) }}">
-                        @csrf
-                        @method('PATCH')
-
-                        <input type="hidden" name="type" value="change_password">
-
+                    {{ Form::open(['route' => ['users.changePassword', $user->id]]) }}
+                        {{ method_field('PATCH') }}
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">@lang('users.new_pass')</label>
-
+                            {{ Form::label('password', __('users.new_pass'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                                {{ Form::password('password', ['class' => 'form-control' . ( $errors->has('password') ? ' is-invalid' : '' )]) }}
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -27,23 +20,18 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">@lang('users.conf_pass')</label>
-
+                            {{ Form::label('password_confirmation', __('users.conf_pass'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
                             </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    @lang('users.change')
-                                </button>
+                                {{ Form::submit(__('users.change'), ['class' => 'btn btn-primary']) }}
                             </div>
                         </div>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
