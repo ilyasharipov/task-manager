@@ -2,47 +2,63 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\WithFaker;
-// use Illuminate\Foundation\Testing\WithoutMiddleware;
-// use Illuminate\Foundation\Testing\withoutExceptionHandling;
-// use App\Task;
 use App\User;
 use App\Task;
 use App\TaskStatus;
+use Illuminate\Support\Arr;
+use Spatie\Tags\Tag;
 use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
-    use DatabaseMigrations;
-
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-
-    private $user;
-    private $task;
-    private $taskStatus;
-
     public function setUp(): void
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
         $this->actingAs($this->user);
-        $this->taskStatus = TaskStatus::create(['name' => 'new']);
-        $this->task = factory(Task::class)->create();
     }
 
-    public function testTasksIndex()
+    public function testIndex()
     {
         $response = $this->get(route('tasks.index'));
-        $response->assertStatus(200)->assertSee($this->task->name);
+        $response->assertOk();
     }
 
-    public function testTasksShow()
+    public function testCreate()
     {
+        $response = $this->get(route('tasks.create'));
+        $response->assertOk();
+    }
+
+    public function testEdit()
+    {
+        $task = factory(Task::class)->create();
+        $response = $this->get(route('tasks.edit', [$task]));
+        $response->assertOk();
+    }
+
+    public function testStore()
+    {
+        $tags = factory(Tag::class)->create(8);
+        $tasks = factory(TaskStatus::class)->create(4);
+        $factoryData = factory(Task::class)->make()->toArray();
+        $data = Arr::only($factoryData, [
+            'name',
+            'description',
+            'status_id',
+            'assigned_to_id',
+            'tags'
+        ]);
+        $response = $this->post(route('tasks.store'), $data);
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect();
+
+        $this->assertDatabaseHas('task_statuses', $data);
+    }
+
+    public function testShow()
+    {
+        $task = factory(Task::class)->create();
         $response = $this->get(route('tasks.show', $this->task->id));
         $taskName = $this->task->name;
         $response->assertStatus(200)->assertSeeText($taskName);

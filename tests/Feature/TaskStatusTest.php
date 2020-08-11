@@ -12,9 +12,8 @@ class TaskStatusTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = factory(User::class)->make();
+        $this->user = factory(User::class)->create();
         $this->actingAs($this->user);
-        factory(TaskStatus::class)->make();
     }
 
     public function testIndex()

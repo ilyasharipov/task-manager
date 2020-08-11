@@ -26,8 +26,8 @@ class StoreTaskPost extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:400'],
-            'status_id' => ['required', 'nullable', 'string'],
-            'assigned_to_id' => ['required', 'nullable', 'string'],
+            'status_id' => ['nullable', 'string'],
+            'assigned_to_id' => ['nullable', 'string'],
             "tags.*"  => "required",
         ];
     }
