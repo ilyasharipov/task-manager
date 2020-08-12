@@ -1,6 +1,6 @@
 # Task-manager
 
-Example to show thttps://cryptic-meadow-38040.herokuapp.com/
+Example to show https://cryptic-meadow-38040.herokuapp.com/
 
 ![task-manager](https://github.com/ilyasharipov/php-project-lvl4/workflows/task-manager/badge.svg)\
 [![Build Status](https://travis-ci.org/ilyasharipov/php-project-lvl4.svg?branch=master)](https://travis-ci.org/ilyasharipov/php-project-lvl4)\
