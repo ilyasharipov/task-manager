@@ -14,7 +14,6 @@ class TaskTest extends TestCase
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
-        factory(User::class)->create();
         factory(TaskStatus::class, 4)->create();
         $this->actingAs($this->user);
     }
@@ -40,6 +39,7 @@ class TaskTest extends TestCase
 
     public function testStore()
     {
+        factory(User::class)->create();
         $factoryData = factory(Task::class)->make()->toArray();
         $data = Arr::only($factoryData, [
             'name',
@@ -57,6 +57,7 @@ class TaskTest extends TestCase
 
     public function testUpdate()
     {
+        factory(User::class)->create();
         $task = factory(Task::class)->create();
         $factoryData = factory(Task::class)->make()->toArray();
         $data = Arr::only($factoryData, [
