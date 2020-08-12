@@ -5,14 +5,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card-header"><h3><i class="fas fa-star-half-alt"></i>&nbsp;Task statuses</h3></div>
-            <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('taskstatuses.create') }}" role="button"><i class="fas fa-plus-circle"></i>&nbsp;Create task status</a>
+            <div class="card-header"><h3><i class="fas fa-star-half-alt"></i>&nbsp;{{ __('taskStatuses.title') }}</h3></div>
+            <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('taskstatuses.create') }}" role="button"><i class="fas fa-plus-circle"></i>&nbsp;{{ __('taskStatuses.create') }}</a>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th class="text-center" scope="col">Name</th>
-                        <th class="text-center" scope="col">Action</th>
+                        <th class="text-center" scope="col">{{ __('taskStatuses.name') }}</th>
+                        <th class="text-center" scope="col">{{ __('taskStatuses.action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
