@@ -25,15 +25,14 @@ Route::group([
 
     Auth::routes();
 
-//    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         Route::resource('/users', 'UserController');
-        Route::get('/users/user_profile/{user}', 'UserController@changePasswordHead')->name('users.changePasswordHead');
         Route::get('/users/change_pass/{user}', 'UserController@changePasswordHead')->name('users.changePasswordHead');
         Route::patch('/users/change_pass/{user}', 'UserController@changePassword')->name('users.changePassword');
         Route::resource('/tasks', 'TaskController');
         Route::resource('/taskstatuses', 'TaskStatusController', ['except' => ['show']]);
         Route::resource('/tags', 'TagController', ['except' => ['show', 'update', 'edit']]);
-//    });
+    });
 
     Route::get('/home', 'HomeController@index')->name('home');
 });
