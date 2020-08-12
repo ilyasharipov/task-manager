@@ -2,10 +2,8 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Arr;
 use Tests\TestCase;
 use App\User;
-use Spatie\Tags\Tag;
 
 class TagTest extends TestCase
 {
