@@ -6,7 +6,6 @@ use App\User;
 use App\Task;
 use App\TaskStatus;
 use Illuminate\Support\Arr;
-use Spatie\Tags\Tag;
 use Tests\TestCase;
 
 class TaskTest extends TestCase
@@ -15,6 +14,8 @@ class TaskTest extends TestCase
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
+        factory(User::class)->create();
+        factory(TaskStatus::class, 4)->create();
         $this->actingAs($this->user);
     }
 
@@ -39,47 +40,46 @@ class TaskTest extends TestCase
 
     public function testStore()
     {
-        $tags = factory(Tag::class)->create(8);
-        $tasks = factory(TaskStatus::class)->create(4);
         $factoryData = factory(Task::class)->make()->toArray();
         $data = Arr::only($factoryData, [
             'name',
             'description',
             'status_id',
+            'creator_id',
             'assigned_to_id',
-            'tags'
         ]);
         $response = $this->post(route('tasks.store'), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
-        $this->assertDatabaseHas('task_statuses', $data);
+        $this->assertDatabaseHas('tasks', $data);
     }
 
-    public function testShow()
+    public function testUpdate()
     {
         $task = factory(Task::class)->create();
-        $response = $this->get(route('tasks.show', $this->task->id));
-        $taskName = $this->task->name;
-        $response->assertStatus(200)->assertSeeText($taskName);
+        $factoryData = factory(Task::class)->make()->toArray();
+        $data = Arr::only($factoryData, [
+            'name',
+            'description',
+            'status_id',
+            'creator_id',
+            'assigned_to_id',
+        ]);
+        $response = $this->patch(route('tasks.update', $task), $data);
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect();
+
+        $this->assertDatabaseHas('tasks', $data);
     }
 
-    public function testTasksUpdate()
+    public function testDestroy()
     {
-        $user = factory(User::class)->create();
+        $task = factory(Task::class)->create();
+        $response = $this->delete(route('tasks.destroy', [$task]));
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect();
 
-        $requestData = [
-            'name' => 'java',
-            'description' => 'add camel framework',
-            'status_id' => (string) $this->taskStatus->id,
-            'creator_id' => (string) $this->user->id,
-            'assigned_to_id' => (string) $user->id
-        ];
-
-        $url = route('tasks.update', $this->task);
-        $response = $this->patch($url, $requestData);
-        $response->assertStatus(302);
-        $this->task->refresh();
-        $this->assertDatabaseHas('tasks', $requestData);
+        $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
     }
 }

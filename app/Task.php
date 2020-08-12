@@ -16,7 +16,6 @@ class Task extends Model
         'status_id',
         'creator_id',
         'assigned_to_id',
-        'tags'
     ];
 
     public function scopeUserTasks($query)
