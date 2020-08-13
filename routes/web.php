@@ -23,10 +23,10 @@ Route::group([
         return view('welcome');
     });
 
-    Auth::routes();
+    Auth::routes(['reset' => false, 'confirm' => false]);
 
     Route::middleware(['auth'])->group(function () {
-        Route::resource('/users', 'UserController');
+        Route::resource('/users', 'UserController', ['except' => ['store', 'create']]);
         Route::get('/users/change_pass/{user}', 'UserController@changePasswordHead')->name('users.changePasswordHead');
         Route::patch('/users/change_pass/{user}', 'UserController@changePassword')->name('users.changePassword');
         Route::resource('/tasks', 'TaskController');
