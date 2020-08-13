@@ -48,6 +48,9 @@ class TagController extends Controller
             'name' => ['required', 'string', 'max:15'],
         ]);
 
+        $tag->setTranslation('name', 'en', $request->name);
+        $tag->setTranslation('name', 'ru', $request->name);
+
         $tag->fill($request->all());
         $tag->save();
 
@@ -64,6 +67,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+//        dd($tag);
         $tag->delete();
 
         flash(__('tags.deleted'))->success();

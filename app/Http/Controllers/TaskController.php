@@ -77,8 +77,15 @@ class TaskController extends Controller
         $task->save();
 
         $tags = $request->tags;
-        $task->attachTags($tags);
-
+        if (!empty($tags)) {
+            foreach ($tags as $name) {
+                $tag = Tag::findOrCreate($name);
+                $tag->setTranslation('name', 'en', $name);
+                $tag->setTranslation('name', 'ru', $name);
+                $tag->save();
+            }
+            $task->attachTags($tags);
+        }
         flash(__('tasks.created'))->success();
         return redirect()
             ->route('tasks.index');
@@ -125,8 +132,15 @@ class TaskController extends Controller
         $task->save();
 
         $tags = $request->tags;
-        $task->syncTags($tags);
-
+        if (!empty($tags)) {
+            foreach ($tags as $name) {
+                $tag = Tag::findOrCreate($name);
+                $tag->setTranslation('name', 'en', $name);
+                $tag->setTranslation('name', 'ru', $name);
+                $tag->save();
+            }
+            $task->syncTags($tags);
+        }
         flash(__('tasks.updated'))->success();
         return redirect()
             ->route('tasks.index');
