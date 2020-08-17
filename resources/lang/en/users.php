@@ -14,5 +14,8 @@ return [
     'delete' => 'Delete your account',
     'change' => 'Change Password',
     'new_pass' => 'New password',
-    'conf_pass' => 'Confirm Password'
+    'conf_pass' => 'Confirm Password',
+    'updated' => 'Update successful!',
+    'pass_changed' => 'Change password sucessful!',
+    'deleted' => 'Delete successful!',
 ];

@@ -70,13 +70,13 @@ class UserController extends Controller
         $user->fill($request->all());
         $user->save();
 
-        flash('Update sucessful!')->success();
+        flash(__('users.updated'))->success();
 
         return redirect()
             ->route('users.index');
     }
 
-    public function changePasswordHead(User $user)
+    public function changePasswordEdit(User $user)
     {
         if (\Auth::user()->id === $user->id) {
             return view('user.change_password', compact('user'));
@@ -92,7 +92,7 @@ class UserController extends Controller
         $user->password = Hash::make($request['password']);
         $user->save();
 
-        flash('Change password sucessful!')->success();
+        flash(__('users.pass_changed'))->success();
         return redirect()
             ->route('users.index');
     }
@@ -103,7 +103,7 @@ class UserController extends Controller
             $user->delete();
         }
 
-        flash('Delete sucessful!')->success();
+        flash(__('users.deleted'))->success();
         return redirect()->route('home');
     }
 }
