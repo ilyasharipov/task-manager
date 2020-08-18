@@ -70,7 +70,7 @@
                                     <a class="dropdown-header text-secondary font-weight-bold text-decoration-none" href="{{ route('users.show', Auth::user()->id) }}">{{ Auth::user()->name }}</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">{{ __('app.edit_profile') }}</a>
-                                    <a class="dropdown-item" href="{{ route('users.changePasswordEdit', Auth::user()) }}">{{ __('app.change_password') }}</a>
+                                    <a class="dropdown-item" href="{{ route('change_pass.edit', Auth::user()) }}">{{ __('app.change_password') }}</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

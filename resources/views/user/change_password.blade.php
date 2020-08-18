@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('users.change') }}</div>
                 <div class="card-body">
-                    {{ Form::open(['route' => ['users.changePassword', $user->id]]) }}
+                    {{ Form::open(['route' => ['change_pass.update', $user->id]]) }}
                         {{ method_field('PATCH') }}
                         <div class="form-group row">
                             {{ Form::label('password', __('users.new_pass'), ['class' => 'col-md-4 col-form-label text-md-right']) }}

@@ -27,9 +27,9 @@ Route::group([
 
     Route::middleware(['auth'])->group(function () {
         Route::resource('/users', 'UserController', ['except' => ['store', 'create']]);
-        Route::resource('/users.change_pass', 'UserChangePassController')->only(['edit', 'update']);
-//        Route::get('/users/change_pass/{user}', 'UserController@changePasswordEdit')->name('users.changePasswordEdit');
-//        Route::patch('/users/change_pass/{user}', 'UserController@changePassword')->name('users.changePassword');
+        Route::resource('/users/change_pass', 'UserChangePasswordController')
+            ->parameters(['change_pass' => 'user'])
+            ->only('edit', 'update');
         Route::resource('/tasks', 'TaskController');
         Route::resource('/taskstatuses', 'TaskStatusController', ['except' => ['show']]);
         Route::resource('/tags', 'TagController', ['except' => ['show', 'update', 'edit']]);
