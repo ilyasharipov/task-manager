@@ -71,7 +71,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}"><i class="fas fa-home"></i>&nbsp;{{ __('welcome.home') }}</a>
+                        <a href="{{ route('dashboard') }}"><i class="fas fa-home"></i>&nbsp;{{ __('welcome.home') }}</a>
                     @else
                         <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i>&nbsp;{{ __('welcome.login') }}</a>
 

@@ -35,5 +35,5 @@ Route::group([
         Route::resource('/tags', 'TagController', ['except' => ['show', 'update', 'edit']]);
     });
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 });

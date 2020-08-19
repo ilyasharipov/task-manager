@@ -83,6 +83,6 @@ class UserController extends Controller
         }
 
         flash(__('users.deleted'))->success();
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
 }
