@@ -7,7 +7,6 @@
             <div class="card-header"><h3><i class="fas fa-tasks"></i>&nbsp;{{ __('tasks.tasks') }}</h3></div>
                 <a class="btn btn-lg mb-2 mt-2 btn-primary" href="{{ route('tasks.create') }}" role="button"><i class="fas fa-plus-circle"></i>&nbsp;{{ __('tasks.create') }}</a>
                 <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('taskstatuses.index') }}" role="button"><i class="fas fa-cogs"></i>&nbsp;{{ __('tasks.status_sitting') }}</a>
-                <a class="btn btn-lg mb-2 mt-2 btn-dark" href="{{ route('tags.index') }}" role="button"><i class="fas fa-tags"></i>&nbsp;{{ __('tasks.tag_sitting') }}</a>
                 {{ Form::open(['route' => ['tasks.index'], 'method' => 'get']) }}
                     <table class="table">
                         <thead>
