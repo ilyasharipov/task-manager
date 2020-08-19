@@ -155,7 +155,6 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $this->authorize($task, Task::class);
-        $task = Task::findOrFail($task->id);
         if ($task) {
             $task->delete();
             flash(__('tasks.deleted'))->success();
