@@ -26,22 +26,22 @@
                                 <th scope="row"></th>
                                 <td colspan="2" class="text-center">
                                     <div class="form-group">
-                                        {{ Form::checkbox('filter[myTasks]', 'on', isset($filters['myTasks']), ['class' => 'form-check-input']) }}&nbsp;{{ __('tasks.my_task') }}
+                                        {{ Form::checkbox('filter[myTasks]', 'on', request()->input('filter.myTasks'), ['class' => 'form-check-input']) }}&nbsp;{{ __('tasks.my_task') }}
                                     </div>
                                 </td>
                                <td>
                                    <div class="form-group">
-                                       {{ Form::select('filter[status]', $statuses, isset($filters['status']), ['class' => 'form-control']) }}
+                                       {{ Form::select('filter[status]', $statuses, request()->input('filter.status'), ['placeholder' => '---', 'class' => 'form-control']) }}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        {{ Form::select('filter[assignedTo]', $users, isset($filters['assignedTo']), ['class' => 'form-control']) }}
+                                        {{ Form::select('filter[assignedTo]', $users, request()->input('filter.assignedTo'), ['placeholder' => '---', 'class' => 'form-control']) }}
                                     </div>
                                 </td>
                                 <td colspan="2">
                                     <div class="form-group">
-                                        {{ Form::select('filter[tags]', $tags, isset($filters['tags']), ['class' => 'form-control']) }}
+                                        {{ Form::select('filter[tags]', $tags, request()->input('filter.tags'), ['placeholder' => '---', 'class' => 'form-control']) }}
                                     </div>
                                 </td>
                                 <td class="text-center">

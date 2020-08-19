@@ -29,7 +29,6 @@ class TaskController extends Controller
         $statuses = TaskStatus::get()->pluck('name', 'id');
         $users = User::get()->pluck('name', 'id');
         $tags = Tag::get()->pluck('name', 'id');
-        $filters = $request->query('filter');
 
         $tasks = QueryBuilder::for(Task::class)
             ->allowedIncludes(['status', 'assignedTo', 'tags'])
@@ -40,7 +39,8 @@ class TaskController extends Controller
                 AllowedFilter::scope('tags', 'find_tags')
             )
             ->paginate();
-        return view('task.index', compact('tasks', 'statuses', 'users', 'tags', 'filters'));
+
+        return view('task.index', compact('tasks', 'statuses', 'users', 'tags'));
     }
 
     /**
