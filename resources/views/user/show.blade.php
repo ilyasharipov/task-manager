@@ -13,33 +13,33 @@
                             <td>{{ $user->id }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('users.nickname')</th>
+                            <th>{{ __('users.nickname') }}</th>
                             <td>{{ $user->nickname }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('users.username')</th>
+                            <th>{{ __('users.username') }}</th>
                             <td>{{ $user->name }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('users.lastname')</th>
+                            <th>{{ __('users.lastname') }}</th>
                             <td>{{ $user->lastName }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('users.gender')</th>
+                            <th>{{ __('users.gender') }}</th>
                             <td>{{ $user->gender }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('users.birthday')</th>
+                            <th>{{ __('users.birthday') }}</th>
                             <td>{{ $user->birthday }}</td>
                         </tr>
                         @if (Auth::user()->id == $user->id)
                             <tr>
-                                <th>@lang('users.email')</th>
+                                <th>{{ __('users.email') }}</th>
                                 <td>{{ $user->email }}</td>
                             </tr>
                         @endif
                         <tr>
-                            <th>@lang('users.data_reg')</th>
+                            <th>{{ __('users.data_reg') }}</th>
                             <td>{{ $user->created_at }}</td>
                         </tr>
                     </table>

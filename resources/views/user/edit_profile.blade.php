@@ -5,11 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">@lang('users.edit_profile')</div>
-
+                <div class="card-header">{{ __('users.edit_profile') }}</div>
                 <div class="card-body">
-                    {{ Form::model($user, ['route' => ['users.update', $user->id]]) }}
-                    <form method="POST" action="{{ route('users.update', $user->id) }}">
+                    {{ Form::model($user, ['route' => ['users.update', $user]]) }}
                         {{ method_field('PATCH') }}
                         <div class="form-group row">
                             {{ Form::label('nickname', __('users.nickname'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
@@ -75,11 +73,10 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {{ Form::submit(__('users.update'), ['class' => 'btn btn-primary']) }}
-                                <a class="btn btn-danger" role="submit" href="{{ route('users.destroy', $user->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow">@lang('users.delete')</a>
+                                <a class="btn btn-danger" role="submit" href="{{ route('users.destroy', $user) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow">{{ __('users.delete') }}</a>
                             </div>
                         </div>
-
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

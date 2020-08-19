@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('tasks.update') }}</div>
                 <div class="card-body">
-                    {{ Form::model($task, ['route' => ['tasks.update', $task->id]]) }}
+                    {{ Form::model($task, ['route' => ['tasks.update', $task]]) }}
                         {{ method_field('PUT') }}
                         <div class="form-group row">
                             {{ Form::label('name', __('tasks.name'), ['class' => 'col-md-4 col-form-label text-md-right']) }}

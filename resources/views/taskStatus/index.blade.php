@@ -21,8 +21,8 @@
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td class="text-center">{{ $taskStatus->name }}</td>
                             <td class="text-center">
-                                <a class="btn btn-success" href="{{ route('taskstatuses.edit', $taskStatus->id) }}" role="button"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-danger" role="submit" href="{{ route('taskstatuses.destroy', $taskStatus->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow"><i class="fas fa-trash"></i></a>
+                                <a class="btn btn-success" href="{{ route('taskstatuses.edit', $taskStatus) }}" role="button"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-danger" role="submit" href="{{ route('taskstatuses.destroy', $taskStatus) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach

@@ -21,7 +21,7 @@ class Task extends Model
     public function scopeUserTasks($query)
     {
         $authUser = Auth::user()->id;
-        return $query->where('creator_id', 'like', "%$authUser%");
+        return $query->where('creator_id', $authUser);
     }
 
     public function scopeFindTags($query, $name)

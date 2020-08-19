@@ -52,18 +52,18 @@
                             @foreach ($tasks as $task)
                                 <tr>
                                     <th scope="row">{{ ($tasks->currentPage()-1) * $tasks->perPage() + $loop->index + 1 }}</th>
-                                    <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a></td>
+                                    <td><a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a></td>
                                     <td>{{ Str::limit($task->description, 10) }}</td>
-                                    <td>{{ $task->status->name ?? null }}</td>
-                                    <td>{{ $task->assignedTo->nickname ?? null }}</td>
+                                    <td>{{ optional($task->status)->name }}</td>
+                                    <td>{{ optional($task->assignedTo)->nickname ?? null }}</td>
                                     <td class="text-center" colspan="2">
                                         @foreach ($task->tags as $tag)
                                             <span class="badge badge-primary">{{ $tag->name }}</span>
                                         @endforeach
                                     </td>
                                     <td class="text-center">
-                                        <a class="btn btn-success" href="{{ route('tasks.edit', $task->id) }}" role="button"><i class="fas fa-edit"></i></a>
-                                        <a class="btn btn-danger" role="submit" href="{{ route('tasks.destroy', $task->id) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow"><i class="fas fa-trash"></i></a>
+                                        <a class="btn btn-success" href="{{ route('tasks.edit', $task) }}" role="button"><i class="fas fa-edit"></i></a>
+                                        <a class="btn btn-danger" role="submit" href="{{ route('tasks.destroy', $task) }}" data-method="delete" data-confirm="Are you sure?" rel="nofollow"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

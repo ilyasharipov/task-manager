@@ -27,7 +27,7 @@ Route::group([
 
     Route::middleware(['auth'])->group(function () {
         Route::resource('/users', 'UserController', ['except' => ['store', 'create']]);
-        Route::resource('/users/change_pass', 'UserChangePasswordController')
+        Route::resource('/change_pass', 'UserChangePasswordController')
             ->parameters(['change_pass' => 'user'])
             ->only('edit', 'update');
         Route::resource('/tasks', 'TaskController');
