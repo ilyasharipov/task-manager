@@ -42,11 +42,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, User $user)
+    public function edit(User $user)
     {
-        if (\Auth::user()->id === $user->id) {
-            return view('user.edit_profile', compact('user'));
-        }
+        $this->authorize('edit', $user);
+        return view('user.edit_profile', compact('user'));
     }
 
     /**
@@ -58,6 +57,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
         $this->validate($request, [
             'nickname' => ['required', 'string', 'max:255', 'unique:users,nickname,' . $user->id],
             'name' => ['required', 'string', 'max:255'],
@@ -72,27 +72,6 @@ class UserController extends Controller
 
         flash(__('users.updated'))->success();
 
-        return redirect()
-            ->route('users.index');
-    }
-
-    public function changePasswordEdit(User $user)
-    {
-        if (\Auth::user()->id === $user->id) {
-            return view('user.change_password', compact('user'));
-        }
-    }
-
-    public function changePassword(Request $request, User $user)
-    {
-        $this->validate($request, [
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
-        $user->password = Hash::make($request['password']);
-        $user->save();
-
-        flash(__('users.pass_changed'))->success();
         return redirect()
             ->route('users.index');
     }

@@ -10,13 +10,13 @@ class UserChangePasswordController extends Controller
 {
     public function edit(User $user)
     {
-        if (\Auth::user()->id === $user->id) {
-            return view('user.change_password', compact('user'));
-        }
+        $this->authorize('edit', $user);
+        return view('user.change_password', compact('user'));
     }
 
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
         $this->validate($request, [
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
