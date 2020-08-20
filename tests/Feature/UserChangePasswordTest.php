@@ -19,23 +19,4 @@ class UserChangePasswordTest extends TestCase
         $response = $this->get(route('change_pass.edit', [$this->user]));
         $response->assertOk();
     }
-
-//    public function testUpdate()
-//    {
-//        factory(User::class)->create();
-//        $task = factory(Task::class)->create();
-//        $factoryData = factory(Task::class)->make()->toArray();
-//        $data = Arr::only($factoryData, [
-//            'name',
-//            'description',
-//            'status_id',
-//            'creator_id',
-//            'assigned_to_id',
-//        ]);
-//        $response = $this->patch(route('tasks.update', $task), $data);
-//        $response->assertSessionHasNoErrors();
-//        $response->assertRedirect();
-//
-//        $this->assertDatabaseHas('tasks', $data);
-//    }
 }

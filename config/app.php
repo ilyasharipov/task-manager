@@ -175,7 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Rollbar\Laravel\RollbarServiceProvider::class,
-        
+        App\Providers\FormServiceProvider::class,
+
     ],
 
     /*
