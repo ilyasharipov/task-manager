@@ -7,7 +7,7 @@ return [
     'tag_sitting' => 'Tag settings',
     'name' => 'Name',
     'description' => 'Description',
-    'status' => 'status',
+    'status' => 'Status',
     'assigned_to' => 'Assigned to',
     'tags' => 'Tags',
     'actions' => 'Actions',

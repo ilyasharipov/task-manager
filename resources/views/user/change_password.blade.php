@@ -9,28 +9,9 @@
                 <div class="card-body">
                     {{ Form::open(['route' => ['change_pass.update', $user]]) }}
                         {{ method_field('PATCH') }}
-                        <div class="form-group row">
-                            {{ Form::label('password', __('users.new_pass'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
-                            <div class="col-md-6">
-                                {{ Form::password('password', ['class' => 'form-control' . ( $errors->has('password') ? ' is-invalid' : '' )]) }}
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            {{ Form::label('password_confirmation', __('users.conf_pass'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
-                            <div class="col-md-6">
-                                {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
-                            </div>
-                        </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                {{ Form::submit(__('users.change'), ['class' => 'btn btn-primary']) }}
-                            </div>
-                        </div>
+                        {{ Form::bsPassword('password', __('users.new_pass')) }}
+                        {{ Form::bsPassConf('password_confirmation', __('users.conf_pass')) }}
+                        {{ Form::bsSubmit(null, __('users.change')) }}
                     {{ Form::close() }}
                 </div>
             </div>
